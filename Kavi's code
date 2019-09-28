@@ -23,7 +23,7 @@ public class GamepadDriveTeleop extends OpMode {
       rightWheelPower = gamepad1.left_stick_y;
       
       leftWheel.setPower(leftWheelPower);
-      rightWheel.setPower(rightWheelPower);
+      rightWheel.setPower(.5);
       
       }
    }
