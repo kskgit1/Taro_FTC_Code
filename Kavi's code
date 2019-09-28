@@ -1,0 +1,26 @@
+public class GamepadDriveTeleop extends OpMode {
+
+  DcMotor leftWheel;
+  DcMotor rightWheel;
+  
+  double leftWheelPower;
+  double rightWheelPower;
+  
+  @Override
+  public void int{
+    leftWheel = hardwareMap.dcMotor.get("left_wheel");
+    rightWheel = hardwareMap.dcMotor.get("right_wheel);
+    
+    leftWheel.setDirection(DcMotor.Direction.REVERSE);
+    }
+    
+    @Override
+    public void loop () {
+      leftWheelPower = gamepad1.left_stick_y;
+      rightWheelPower = gamepad1.right_stick_y;
+      
+      leftWheelPower = gamepad1.left_stick_y;
+      rightWheelPower = gamepad1.left_stick_y;
+      
+      leftWheel.
+    
