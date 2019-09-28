@@ -1,0 +1,39 @@
+package org.firstinspires.ftc.teamcode;
+
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+
+
+@TeleOp(name = "Driver Controlled", group = "DriverControlled")
+
+public class DriverControlled extends LinearOpMode
+{
+
+    private DcMotor FrontLeftMotor;
+    private DcMotor FrontRightMotor;
+    private DcMotor BackLeftMotor;
+    private DcMotor BackRightMotor;
+
+
+    @Override
+    public void RunOpMode () throws InterruptedException
+    {
+
+        FrontLeftMotor = hardwareMap.dcMotor.get("motor_0");
+        FrontRightMotor = hardwareMap.dcMotor.get("motor_1");
+        BackLeftMotor = hardwareMap.dcMotor.get("motor_2");
+        BackRightMotor = hardwareMap.dcMotor.get("motor_3");
+
+        FrontLeftMotor.setPower();
+
+        waitForStart();
+
+        while opModeIsActive()
+        {
+
+            idle();
+        }
+    }
+}
