@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-@Autonomous(name="Test_Autonomous", group="Linear OpMode")
+@Autonomous(name="forward", group="Linear OpMode")
 
 public class forward extends LinearOpMode{
 
