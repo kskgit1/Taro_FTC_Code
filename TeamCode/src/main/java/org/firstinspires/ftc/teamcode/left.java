@@ -6,9 +6,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name="left", group="Linear OpMode")
+@Autonomous(name="right", group="Linear OpMode")
 
-public class left extends LinearOpMode
+public class right extends LinearOpMode
 {
 
     private ElapsedTime runtime = new ElapsedTime();
@@ -31,8 +31,11 @@ public class left extends LinearOpMode
         bldrive = hardwareMap.dcMotor.get("bl_drive");
 
 
+        bldrive.setDirection(DcMotorSimple.Direction.FORWARD);
+        brdrive.setDirection(DcMotorSimple.Direction.FORWARD);
         frdrive.setDirection(DcMotorSimple.Direction.REVERSE);
-        brdrive.setDirection(DcMotorSimple.Direction.REVERSE);
+        fldrive.setDirection(DcMotorSimple.Direction.REVERSE);
+
 
 
         waitForStart();
@@ -57,4 +60,3 @@ public class left extends LinearOpMode
     }
 
 }
-
