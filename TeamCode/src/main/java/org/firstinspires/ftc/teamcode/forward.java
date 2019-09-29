@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -11,8 +10,7 @@ import com.qualcomm.robotcore.util.Range;
 
 @Autonomous(name="forward", group="Linear OpMode")
 
-public class forward extends LinearOpMode
-{
+public class forward extends LinearOpMode{
 
     private ElapsedTime runtime = new ElapsedTime();
 
@@ -23,8 +21,7 @@ public class forward extends LinearOpMode
 
     double power= 0.5;
 
-    public void runOpMode() throws InterruptedException
-    {
+    public void runOpMode() throws InterruptedException {
         telemetry.addData("Status", "Intialized");
         telemetry.update();
 
