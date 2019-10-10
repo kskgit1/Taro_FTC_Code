@@ -27,7 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.robotcontroller.external.samples;
+package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -48,9 +48,9 @@ import com.qualcomm.robotcore.hardware.Servo;
  * Use Android Studio to Copy this Class, and Paste it into your team's code folder with a new name.
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
-@TeleOp(name = "Concept: Scan Servo", group = "Concept")
+@TeleOp(name = "servo_test", group = "Linear OpMode")
 
-public class ConceptScanServo extends LinearOpMode {
+public class servo_test extends LinearOpMode {
 
     static final double INCREMENT   = 0.01;     // amount to slew servo each CYCLE_MS cycle
     static final int    CYCLE_MS    =   50;     // period of each cycle
@@ -67,9 +67,9 @@ public class ConceptScanServo extends LinearOpMode {
     @Override
     public void runOpMode() {
 
-        // Connect to servo (Assume PushBot Left Hand)
+        // Connect to servo
         // Change the text in quotes to match any servo name on your robot.
-        servo = hardwareMap.get(Servo.class, "left_hand");
+        servo = hardwareMap.get(Servo.class, "test");
 
         // Wait for the start button
         telemetry.addData(">", "Press Start to scan Servo." );
@@ -82,9 +82,9 @@ public class ConceptScanServo extends LinearOpMode {
         while(opModeIsActive()){
             if (gamepad1.a)
             {
-                dostuff = !dostuff
+                dostuff = !dostuff;
             }
-            // slew the servo, according to the rampUp (direction) variable.
+            // slow the servo, according to the rampUp (direction) variable.
             if (dostuff) 
             {
             if (rampUp) 
