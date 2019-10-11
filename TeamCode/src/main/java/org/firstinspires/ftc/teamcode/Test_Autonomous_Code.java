@@ -19,8 +19,6 @@ public class Test_Autonomous_Code extends LinearOpMode{
     DcMotor brdrive;
     DcMotor bldrive;
 
-    double power= 0.5;
-
     public void runOpMode() throws InterruptedException {
         telemetry.addData("Status", "Intialized");
         telemetry.update();
@@ -38,22 +36,62 @@ public class Test_Autonomous_Code extends LinearOpMode{
         waitForStart();
         runtime.reset();
 
+        forward(0.5, 2000);
+        backward(0.5, 2000);
+        right(0.5, 1000);
+
+
+    }
+    public void forward(double power, long wait_time) {
         fldrive.setPower(power);
         frdrive.setPower(power);
         brdrive.setPower(power);
         bldrive.setPower(power);
-
-        sleep(2000);
-
-        power= 0.0;
-
+        sleep(wait_time);
+        power = 0.0;
         fldrive.setPower(power);
         frdrive.setPower(power);
         brdrive.setPower(power);
         bldrive.setPower(power);
+    }
 
+    public void backward(double power, long wait_time) {
+        fldrive.setPower(-power);
+        frdrive.setPower(-power);
+        brdrive.setPower(-power);
+        bldrive.setPower(-power);
+        sleep(wait_time);
+        power = 0.0;
+        fldrive.setPower(-power);
+        frdrive.setPower(-power);
+        brdrive.setPower(-power);
+        bldrive.setPower(-power);
+    }
 
+    public void left(double power, long wait_time) {
+        fldrive.setPower(-power);
+        frdrive.setPower(power);
+        brdrive.setPower(power);
+        bldrive.setPower(-power);
+        sleep(wait_time);
+        power = 0.0;
+        fldrive.setPower(-power);
+        frdrive.setPower(-power);
+        brdrive.setPower(-power);
+        bldrive.setPower(-power);
+    }
 
+    public void right(double power, long wait_time) {
+        fldrive.setPower(power);
+        frdrive.setPower(-power);
+        brdrive.setPower(-power);
+        bldrive.setPower(power);
+        sleep(wait_time);
+        power = 0.0;
+        fldrive.setPower(-power);
+        frdrive.setPower(-power);
+        brdrive.setPower(-power);
+        bldrive.setPower(-power);
     }
 
 }
