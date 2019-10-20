@@ -1,12 +1,18 @@
-## NOTICE
-
 This repository contains the public TEAM TARO'S FTC SDK for the SKYSTONE (2019-2020) competition season.  
 
 ## Welcome!
-This GitHub repository contains the source code that is used to build an Android app to control a *FIRST* Tech Challenge competition robot.  To use this SDK, download/clone the entire project to your local computer.
+This GitHub repository contains the code of Team Taro 13218 for Android app to control a *FIRST* Tech Challenge competition robot. To use this SDK, download/clone the entire project to your local computer.
+
+## Social Media
+Be sure to check us out on our social media!
+
+Instagram: @ftc_team_taro
+GoFundMe: [TeamTaro_GoFundMe](https://www.gofundme.com/f/ftc-team-taro-fundraising)
+
+If you any questions, concerns, or if you are interested in becoming a sponsor of our team, please contact us at teamtaroftc@gmail.com!
 
 ## Downloading the Project
-If you are an Android Studio programmer, there are several ways to download this repo.
+There are several ways to download our FTC Skystone (2019-20) repo to use with Android Studio.
 
 * If you are a git user, you can clone the most current version of the repository:
 
