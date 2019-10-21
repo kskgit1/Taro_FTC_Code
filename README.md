@@ -7,6 +7,7 @@ This GitHub repository contains the code of Team Taro 13218 for Android app to c
 Be sure to check us out on our social media!
 
 Instagram: @ftc_team_taro
+
 GoFundMe: [TeamTaro_GoFundMe](https://www.gofundme.com/f/ftc-team-taro-fundraising)
 
 If you any questions, concerns, or if you are interested in becoming a sponsor of our team, please contact us at teamtaroftc@gmail.com!
