@@ -17,7 +17,7 @@ There are several ways to download our FTC Skystone (2019-20) repo to use with A
 
 * If you are a git user, you can clone the most current version of the repository:
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;git clone https://github.com/FIRST-Tech-Challenge/SKYSTONE.git</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;git clone https://github.com/kavirajesh22/Taro_FTC_Code.git</p>
 
 * Or, if you prefer, you can use the "Download Zip" button available through the main repository page.  Downloading the project as a .ZIP file will keep the size of the download manageable.
 
