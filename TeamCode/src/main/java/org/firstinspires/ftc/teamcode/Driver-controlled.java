@@ -50,7 +50,7 @@ import com.qualcomm.robotcore.util.Range;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name="Basic Teleop, 9-28-19", group="Linear Opmode")
+@TeleOp(name="Driver Controlled", group="Linear Opmode")
 public class BasicOpMode extends LinearOpMode {
 
     // Declare OpMode members.
@@ -114,14 +114,13 @@ public class BasicOpMode extends LinearOpMode {
             
             if (gamepad1.left_bumper)
             {
-                servo.setPosition(0.25);
+                servo.setPosition(0.5);
             }
 
             if (gamepad1.right_bumper)
             {
-                servo.setPosition(0.5);
+                servo.setPosition(0.25);
             }
-
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
