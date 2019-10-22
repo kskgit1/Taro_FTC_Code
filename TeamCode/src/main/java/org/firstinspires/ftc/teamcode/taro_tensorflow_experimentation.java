@@ -76,7 +76,7 @@ public class taro_tensorflow_experimentation extends LinearOpMode {
 
     /**
      * {@link #vuforia} is the variable we will use to store our instance of the Vuforia
-     * localizatio`n engine.
+     * localization engine.
      */
     private VuforiaLocalizer vuforia;
 
