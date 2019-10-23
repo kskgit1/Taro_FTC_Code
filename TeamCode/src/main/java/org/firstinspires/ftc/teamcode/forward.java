@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 @Autonomous(name="forward", group="Linear OpMode")
+@Disabled
 
 public class forward extends LinearOpMode{
 
