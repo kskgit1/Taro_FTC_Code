@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.util.Range;
  
  
  @TeleOp(name="MecanumWheels", group="Linear Opmode")
- public class BasicOpMode extends LinearOpMode(){
+ public class MecanumWheels extends LinearOpMode(){
         double Speed = -gamepad1.left_stick_y;
         double Turn = gamepad1.left_stick_x;
         double Strafe = gamepad1.right_stick_x;
