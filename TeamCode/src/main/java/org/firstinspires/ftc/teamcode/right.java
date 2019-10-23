@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Autonomous(name="right", group="Linear OpMode")
+@Disabled
 
 public class right extends LinearOpMode
 {
