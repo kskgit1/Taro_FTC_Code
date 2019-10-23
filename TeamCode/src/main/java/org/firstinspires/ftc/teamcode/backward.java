@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Autonomous(name="backward", group="Linear OpMode")
+@Disabled
 
 public class backward extends LinearOpMode
 {
