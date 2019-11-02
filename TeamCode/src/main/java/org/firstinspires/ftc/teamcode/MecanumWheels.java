@@ -34,18 +34,18 @@ public class MecanumWheels extends LinearOpMode {
         while (opModeIsActive()) {
 
             double Speed = -gamepad1.left_stick_y;
-            double Turn = gamepad1.left_stick_x;
-            double Strafe = gamepad1.right_stick_x;
+            double Turn = gamepad1.right_stick_x;
+            double Strafe = gamepad1.left_stick_x;
 
             double f_left;
             double f_right;
             double b_left;
             double b_right;
 
-            f_left = Speed + Turn - Strafe;
-            f_right = Speed + Turn + Strafe;
-            b_right = Speed - Turn - Strafe;
-            b_left = Speed - Turn + Strafe;
+            f_left = Speed + Turn + Strafe;
+            f_right = Speed - Turn - Strafe;
+            b_right = Speed - Turn + Strafe;
+            b_left = Speed + Turn - Strafe;
 
             flDrive.setPower(Range.clip(f_left, -1.0, 1.0));
             frDrive.setPower(Range.clip(f_right, -1.0, 1.0));
