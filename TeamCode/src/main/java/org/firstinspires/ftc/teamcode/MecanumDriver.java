@@ -7,8 +7,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 
-@TeleOp(name = "MecanumWheels", group = "Linear OpMode")
-public class MecanumWheels extends LinearOpMode {
+@TeleOp(name = "MecanumDriver", group = "Linear OpMode")
+public class MecanumDriver extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor flDrive, frDrive, blDrive, brDrive;
