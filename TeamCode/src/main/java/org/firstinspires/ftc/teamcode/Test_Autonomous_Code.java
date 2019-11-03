@@ -36,6 +36,8 @@ public class Test_Autonomous_Code extends LinearOpMode{
         waitForStart();
         runtime.reset();
 
+
+        //moving code starts here
         forward(0.5, 2000);
         backward(0.5, 2000);
         right(0.5, 1000);
