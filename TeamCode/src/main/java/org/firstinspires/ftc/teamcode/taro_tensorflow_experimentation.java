@@ -67,6 +67,9 @@ public class taro_tensorflow_experimentation extends LinearOpMode {
     private DcMotor fldrive, frdrive, bldrive, brdrive;
     Servo servo;
 
+    double currentposition;
+    double currentposition2;
+
     /*
      * IMPORTANT: You need to obtain your own license key to use Vuforia. The string below with which
      * 'parameters.vuforiaLicenseKey' is initialized is for illustration only, and will not function.
@@ -132,13 +135,13 @@ public class taro_tensorflow_experimentation extends LinearOpMode {
 
         if (opModeIsActive()) {
             while (opModeIsActive()) {
+                strafeleft()
                 if (tfod != null) {
                     // getUpdatedRecognitions() will return null if no new information is available since
                     // the last time that call was made.
                     List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
                     if (updatedRecognitions != null) {
                       telemetry.addData("# Object Detected", updatedRecognitions.size());
-
                       // step through the list of recognitions and display boundary info.
                       int i = 0;
                       for (Recognition recognition : updatedRecognitions) {
@@ -263,5 +266,24 @@ public class taro_tensorflow_experimentation extends LinearOpMode {
         frdrive.setPower(power);
         brdrive.setPower(power);
         bldrive.setPower(power);
+    }
+    public void release()
+    {
+        if (currentposition == 0.0) // if arm is closed, make it open
+        {
+            currentposition = 0.5;
+            sleep(150);
+        }
+        servo.setPosition(currentposition);
+    }
+
+    public void grab()
+    {    // if arm is open, make it closed
+
+        if (currentposition2 == 0.5)
+        {
+            currentposition = 0.0;
+            sleep(150);
+        }
     }
 }
