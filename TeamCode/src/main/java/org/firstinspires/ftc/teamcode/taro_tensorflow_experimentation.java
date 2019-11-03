@@ -39,6 +39,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.CameraDirection;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.util.Range;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import java.util.List;
 
@@ -58,6 +62,10 @@ public class taro_tensorflow_experimentation extends LinearOpMode {
     private static final String TFOD_MODEL_ASSET = "Skystone.tflite";
     private static final String LABEL_FIRST_ELEMENT = "Stone";
     private static final String LABEL_SECOND_ELEMENT = "Skystone";
+
+    private ElapsedTime runtime = new ElapsedTime();
+    private DcMotor flDrive, frDrive, blDrive, brDrive;
+    Servo servo;
 
     /*
      * IMPORTANT: You need to obtain your own license key to use Vuforia. The string below with which
@@ -91,6 +99,17 @@ public class taro_tensorflow_experimentation extends LinearOpMode {
         // The TFObjectDetector uses the camera frames from the VuforiaLocalizer, so we create that
         // first.
         initVuforia();
+
+        flDrive  = hardwareMap.get(DcMotor.class, "fl_drive");
+        frDrive  = hardwareMap.get(DcMotor.class, "fr_drive");
+        brDrive = hardwareMap.get(DcMotor.class, "br_drive");
+        blDrive = hardwareMap.get(DcMotor.class, "bl_drive");
+        servo = hardwareMap.get(Servo.class, "arm");
+
+        flDrive.setDirection(DcMotor.Direction.FORWARD);
+        frDrive.setDirection(DcMotor.Direction.REVERSE);
+        brDrive.setDirection(DcMotor.Direction.REVERSE);
+        blDrive.setDirection(DcMotor.Direction.FORWARD);
 
         if (ClassFactory.getInstance().canCreateTFObjectDetector()) {
             initTfod();
