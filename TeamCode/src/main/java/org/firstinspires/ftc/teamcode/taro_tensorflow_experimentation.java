@@ -64,7 +64,7 @@ public class taro_tensorflow_experimentation extends LinearOpMode {
     private static final String LABEL_SECOND_ELEMENT = "Skystone";
 
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor flDrive, frDrive, blDrive, brDrive;
+    private DcMotor fldrive, frdrive, bldrive, brdrive;
     Servo servo;
 
     /*
@@ -100,16 +100,16 @@ public class taro_tensorflow_experimentation extends LinearOpMode {
         // first.
         initVuforia();
 
-        flDrive  = hardwareMap.get(DcMotor.class, "fl_drive");
-        frDrive  = hardwareMap.get(DcMotor.class, "fr_drive");
-        brDrive = hardwareMap.get(DcMotor.class, "br_drive");
-        blDrive = hardwareMap.get(DcMotor.class, "bl_drive");
+        fldrive  = hardwareMap.get(DcMotor.class, "fl_drive");
+        frdrive  = hardwareMap.get(DcMotor.class, "fr_drive");
+        brdrive = hardwareMap.get(DcMotor.class, "br_drive");
+        bldrive = hardwareMap.get(DcMotor.class, "bl_drive");
         servo = hardwareMap.get(Servo.class, "arm");
 
-        flDrive.setDirection(DcMotor.Direction.FORWARD);
-        frDrive.setDirection(DcMotor.Direction.REVERSE);
-        brDrive.setDirection(DcMotor.Direction.REVERSE);
-        blDrive.setDirection(DcMotor.Direction.FORWARD);
+        fldrive.setDirection(DcMotor.Direction.FORWARD);
+        frdrive.setDirection(DcMotor.Direction.REVERSE);
+        brdrive.setDirection(DcMotor.Direction.REVERSE);
+        bldrive.setDirection(DcMotor.Direction.FORWARD);
 
         if (ClassFactory.getInstance().canCreateTFObjectDetector()) {
             initTfod();
@@ -187,5 +187,81 @@ public class taro_tensorflow_experimentation extends LinearOpMode {
         tfodParameters.minimumConfidence = 0.8;
         tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
         tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABEL_FIRST_ELEMENT, LABEL_SECOND_ELEMENT);
+    }
+
+    public void forward(double power, long wait_time) {
+        fldrive.setPower(power);
+        frdrive.setPower(power);
+        brdrive.setPower(power);
+        bldrive.setPower(power);
+        sleep(wait_time);
+        power = 0.0;
+        fldrive.setPower(power);
+        frdrive.setPower(power);
+        brdrive.setPower(power);
+        bldrive.setPower(power);
+    }
+
+    public void backward(double power, long wait_time) {
+        fldrive.setPower(-power);
+        frdrive.setPower(-power);
+        brdrive.setPower(-power);
+        bldrive.setPower(-power);
+        sleep(wait_time);
+        power = 0.0;
+        fldrive.setPower(-power);
+        frdrive.setPower(-power);
+        brdrive.setPower(-power);
+        bldrive.setPower(-power);
+    }
+
+    public void left(double power, long wait_time) {
+        fldrive.setPower(-power);
+        frdrive.setPower(power);
+        brdrive.setPower(power);
+        bldrive.setPower(-power);
+        sleep(wait_time);
+        power = 0.0;
+        fldrive.setPower(-power);
+        frdrive.setPower(-power);
+        brdrive.setPower(-power);
+        bldrive.setPower(-power);
+    }
+
+    public void right(double power, long wait_time) {
+        fldrive.setPower(power);
+        frdrive.setPower(-power);
+        brdrive.setPower(-power);
+        bldrive.setPower(power);
+        sleep(wait_time);
+        power = 0.0;
+        fldrive.setPower(-power);
+        frdrive.setPower(-power);
+        brdrive.setPower(-power);
+        bldrive.setPower(-power);
+    }
+    public void strafeleft(double power, long wait_time) {
+        fldrive.setPower(-power);
+        frdrive.setPower(power);
+        brdrive.setPower(-power);
+        bldrive.setPower(power);
+        sleep(wait_time);
+        power = 0.0;
+        fldrive.setPower(power);
+        frdrive.setPower(power);
+        brdrive.setPower(power);
+        bldrive.setPower(power);
+    }
+    public void straferight(double power, long wait_time) {
+        fldrive.setPower(power);
+        frdrive.setPower(-power);
+        brdrive.setPower(power);
+        bldrive.setPower(-power);
+        sleep(wait_time);
+        power = 0.0;
+        fldrive.setPower(power);
+        frdrive.setPower(power);
+        brdrive.setPower(power);
+        bldrive.setPower(power);
     }
 }
