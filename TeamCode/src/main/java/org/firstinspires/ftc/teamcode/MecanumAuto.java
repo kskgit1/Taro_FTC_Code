@@ -100,10 +100,10 @@ public class MecanumAuto extends LinearOpMode{
         bldrive.setPower(power);
         sleep(wait_time);
         power = 0.0;
-        fldrive.setPower(-power);
-        frdrive.setPower(-power);
-        brdrive.setPower(-power);
-        bldrive.setPower(-power);
+        fldrive.setPower(power);
+        frdrive.setPower(power);
+        brdrive.setPower(power);
+        bldrive.setPower(power);
     }
     public void straferight(double power, long wait_time) {
         fldrive.setPower(power);
@@ -112,10 +112,10 @@ public class MecanumAuto extends LinearOpMode{
         bldrive.setPower(-power);
         sleep(wait_time);
         power = 0.0;
-        fldrive.setPower(-power);
-        frdrive.setPower(-power);
-        brdrive.setPower(-power);
-        bldrive.setPower(-power);
+        fldrive.setPower(power);
+        frdrive.setPower(power);
+        brdrive.setPower(power);
+        bldrive.setPower(power);
     }
 
 }
