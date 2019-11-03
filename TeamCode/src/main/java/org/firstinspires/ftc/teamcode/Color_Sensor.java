@@ -9,9 +9,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 
-@Autonomous(name="Color-Sensor", group="Linear OpMode")
+@Autonomous(name="Color_Sensor", group="Linear OpMode")
 
-public class Color extends LinearOpMode {
+public class Color_Sensor extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
 
