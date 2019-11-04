@@ -4,7 +4,6 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -23,15 +22,15 @@ public class MecanumAuto extends LinearOpMode{
         telemetry.addData("Status", "Intialized");
         telemetry.update();
 
-        fldrive = hardwareMap.dcMotor.get("fl_drive");
-        frdrive = hardwareMap.dcMotor.get("fr_drive");
-        brdrive = hardwareMap.dcMotor.get("br_drive");
-        bldrive = hardwareMap.dcMotor.get("bl_drive");
+        fldrive  = hardwareMap.get(DcMotor.class, "fl_drive");
+        frdrive  = hardwareMap.get(DcMotor.class, "fr_drive");
+        brdrive = hardwareMap.get(DcMotor.class, "br_drive");
+        bldrive = hardwareMap.get(DcMotor.class, "bl_drive");
 
-        fldrive.setDirection(DcMotorSimple.Direction.REVERSE);
-        frdrive.setDirection(DcMotorSimple.Direction.FORWARD);
-        brdrive.setDirection(DcMotorSimple.Direction.FORWARD);
-        bldrive.setDirection(DcMotorSimple.Direction.REVERSE);
+        fldrive.setDirection(DcMotor.Direction.FORWARD);
+        frdrive.setDirection(DcMotor.Direction.REVERSE);
+        brdrive.setDirection(DcMotor.Direction.REVERSE);
+        bldrive.setDirection(DcMotor.Direction.FORWARD);
 
         waitForStart();
         runtime.reset();
