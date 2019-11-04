@@ -135,7 +135,7 @@ public class taro_tensorflow_experimentation extends LinearOpMode {
 
         if (opModeIsActive()) {
             while (opModeIsActive()) {
-                strafeleft()
+                strafeleft(0.5, 1000);
                 if (tfod != null) {
                     // getUpdatedRecognitions() will return null if no new information is available since
                     // the last time that call was made.
@@ -144,6 +144,11 @@ public class taro_tensorflow_experimentation extends LinearOpMode {
                       telemetry.addData("# Object Detected", updatedRecognitions.size());
                       // step through the list of recognitions and display boundary info.
                       int i = 0;
+                      //actions to complete after recognized
+                       forward(0.5, 500);
+                       grab();
+                       backward(0.5, 500);
+                       right(0.5, 200);
                       for (Recognition recognition : updatedRecognitions) {
                         telemetry.addData(String.format("label (%d)", i), recognition.getLabel());
                         telemetry.addData(String.format("  left,top (%d)", i), "%.03f , %.03f",
