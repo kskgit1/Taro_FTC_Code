@@ -10,28 +10,34 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
 
 @Autonomous(name="DriveWithEncoder", group="Exercises")
-//@Disabled
 public class DriveWithEncoder extends LinearOpMode
 {
-    DcMotor leftMotor;
-    DcMotor rightMotor;
+    private DcMotor flDrive, frDrive, blDrive, brDrive;
 
     @Override
     public void runOpMode() throws InterruptedException
     {
-        leftMotor = hardwareMap.dcMotor.get("left_motor");
-        rightMotor = hardwareMap.dcMotor.get("right_motor");
-        
-        leftMotor.setDirection(DcMotor.Direction.REVERSE);
+        flDrive  = hardwareMap.get(DcMotor.class, "fl_drive");
+        frDrive  = hardwareMap.get(DcMotor.class, "fr_drive");
+        brDrive = hardwareMap.get(DcMotor.class, "br_drive");
+        blDrive = hardwareMap.get(DcMotor.class, "bl_drive");
+
+        flDrive.setDirection(DcMotor.Direction.FORWARD);
+        frDrive.setDirection(DcMotor.Direction.REVERSE);
+        brDrive.setDirection(DcMotor.Direction.REVERSE);
+        blDrive.setDirection(DcMotor.Direction.FORWARD);
 
         // reset encoder count kept by left motor.
-        leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        flDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        flDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        flDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        flDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         // set left motor to run to target encoder position and stop with brakes on.
         leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         // set right motor to run without regard to an encoder.
-        rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        //rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         telemetry.addData("Mode", "waiting");
         telemetry.update();
