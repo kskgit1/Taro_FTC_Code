@@ -32,7 +32,7 @@ public class DriveWithEncoder extends LinearOpMode
         frDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         blDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         brDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        
+
         // set motors to run to target encoder position and stop with brakes on.
         flDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         frDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -58,13 +58,11 @@ public class DriveWithEncoder extends LinearOpMode
 
         // wait while opmode is active and left motor is busy running to position.
 
-        while (opModeIsActive() && leftMotor.isBusy())
-        {
-            telemetry.addData("encoder-fwd", leftMotor.getCurrentPosition() + "  busy=" + leftMotor.isBusy());
+        while (opModeIsActive() && flDrive.isBusy()) {
+            telemetry.addData("encoder-fwd", flDrive.getCurrentPosition() + "  busy=" + flDrive.isBusy());
             telemetry.update();
             idle();
         }
-
 
         // wait 5 sec so you can observe the final encoder position.
 
@@ -72,7 +70,7 @@ public class DriveWithEncoder extends LinearOpMode
 
         while (opModeIsActive() && getRuntime() < 5)
         {
-            telemetry.addData("encoder-fwd-end", leftMotor.getCurrentPosition() + "  busy=" + leftMotor.isBusy());
+            telemetry.addData("encoder-fwd-end", flDrive.getCurrentPosition() + "  busy=" + flDrive.isBusy());
             telemetry.update();
             idle();
         }
@@ -85,9 +83,9 @@ public class DriveWithEncoder extends LinearOpMode
         leftMotor.setPower(-0.25);
         rightMotor.setPower(-0.25);
 
-        while (opModeIsActive() && leftMotor.getCurrentPosition() > 0)
+        while (opModeIsActive() && flDrive.getCurrentPosition() > 0)
         {
-            telemetry.addData("encoder-back", leftMotor.getCurrentPosition());
+            telemetry.addData("encoder-back", flDrive.getCurrentPosition());
             telemetry.update();
             idle();
         }
@@ -103,7 +101,7 @@ public class DriveWithEncoder extends LinearOpMode
 
         while (opModeIsActive() && getRuntime() < 5)
         {
-            telemetry.addData("encoder-back-end", leftMotor.getCurrentPosition());
+            telemetry.addData("encoder-back-end", flDrive.getCurrentPosition());
             telemetry.update();
             idle();
         }
