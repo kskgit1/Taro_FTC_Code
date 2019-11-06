@@ -54,17 +54,16 @@ public class DriveWithEncoder extends LinearOpMode
 
         // wait while opmode is active and left motor is busy running to position.
     }
-    public void forward(double power, long wait_time) {
+    public void forward(double power, int distance) {
         fldrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frdrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         bldrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         brdrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        
+
         fldrive.setPower(power);
         frdrive.setPower(power);
         brdrive.setPower(power);
         bldrive.setPower(power);
-        sleep(wait_time);
         power = 0.0;
         fldrive.setPower(power);
         frdrive.setPower(power);
@@ -72,12 +71,11 @@ public class DriveWithEncoder extends LinearOpMode
         bldrive.setPower(power);
     }
 
-    public void backward(double power, long wait_time) {
+    public void backward(double power, int distance) {
         fldrive.setPower(-power);
         frdrive.setPower(-power);
         brdrive.setPower(-power);
         bldrive.setPower(-power);
-        sleep(wait_time);
         power = 0.0;
         fldrive.setPower(-power);
         frdrive.setPower(-power);
@@ -85,12 +83,11 @@ public class DriveWithEncoder extends LinearOpMode
         bldrive.setPower(-power);
     }
 
-    public void left(double power, long wait_time) {
+    public void left(double power, int distance) {
         fldrive.setPower(-power);
         frdrive.setPower(power);
         brdrive.setPower(power);
         bldrive.setPower(-power);
-        sleep(wait_time);
         power = 0.0;
         fldrive.setPower(-power);
         frdrive.setPower(-power);
@@ -98,36 +95,33 @@ public class DriveWithEncoder extends LinearOpMode
         bldrive.setPower(-power);
     }
 
-    public void right(double power, long wait_time) {
+    public void right(double power, int distance) {
         fldrive.setPower(power);
         frdrive.setPower(-power);
         brdrive.setPower(-power);
         bldrive.setPower(power);
-        sleep(wait_time);
         power = 0.0;
         fldrive.setPower(-power);
         frdrive.setPower(-power);
         brdrive.setPower(-power);
         bldrive.setPower(-power);
     }
-    public void strafeleft(double power, long wait_time) {
+    public void strafeleft(double power, int distance) {
         fldrive.setPower(-power);
         frdrive.setPower(power);
         brdrive.setPower(-power);
         bldrive.setPower(power);
-        sleep(wait_time);
         power = 0.0;
         fldrive.setPower(power);
         frdrive.setPower(power);
         brdrive.setPower(power);
         bldrive.setPower(power);
     }
-    public void straferight(double power, long wait_time) {
+    public void straferight(double power, int distance) {
         fldrive.setPower(power);
         frdrive.setPower(-power);
         brdrive.setPower(power);
         bldrive.setPower(-power);
-        sleep(wait_time);
         power = 0.0;
         fldrive.setPower(power);
         frdrive.setPower(power);
