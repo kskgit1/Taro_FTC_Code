@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.util.Range;
 public class MecanumDriver extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor flDrive, frDrive, blDrive, brDrive;
+    private DcMotor flDrive, frDrive, blDrive, brDrive, flyDrive;
 
     @Override
     public void runOpMode() {
@@ -22,13 +22,13 @@ public class MecanumDriver extends LinearOpMode {
         frDrive = hardwareMap.get(DcMotor.class, "fr_drive");
         brDrive = hardwareMap.get(DcMotor.class, "br_drive");
         blDrive = hardwareMap.get(DcMotor.class, "bl_drive");
-        flyDrive = hardwareMap.get(DcMotor.class, "fly_drive");
+        //flyDrive = hardwareMap.get(DcMotor.class, "fly_drive");
 
         flDrive.setDirection(DcMotor.Direction.FORWARD);
         frDrive.setDirection(DcMotor.Direction.REVERSE);
         brDrive.setDirection(DcMotor.Direction.REVERSE);
         blDrive.setDirection(DcMotor.Direction.FORWARD);
-        flyDrive.setDirection(DcMotor.Direction.FORWARD);
+        //flyDrive.setDirection(DcMotor.Direction.FORWARD);
 
         waitForStart();
         runtime.reset();
@@ -54,7 +54,7 @@ public class MecanumDriver extends LinearOpMode {
             brDrive.setPower(Range.clip(b_right, -1.0, 1.0));
             blDrive.setPower(Range.clip(b_left, -1.0, 1.0));
             
-            if(gamepad2.x)
+           /* if(gamepad2.x)
             {
                flydrive.setPower(0.7); 
             }
@@ -62,7 +62,7 @@ public class MecanumDriver extends LinearOpMode {
              if(gamepad2.b)
             {
                flydrive.setPower(0.0); 
-            }
+            }*/
 
 
             telemetry.addData("Status", "Run Time: " + runtime.toString());
