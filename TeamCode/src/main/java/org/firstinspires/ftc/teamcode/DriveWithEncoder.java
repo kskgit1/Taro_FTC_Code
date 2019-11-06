@@ -12,32 +12,29 @@ import com.qualcomm.robotcore.hardware.DcMotorController;
 @Autonomous(name="DriveWithEncoder", group="Exercises")
 public class DriveWithEncoder extends LinearOpMode
 {
-    private DcMotor flDrive, frDrive, blDrive, brDrive;
+    private DcMotor fldrive, frdrive, bldrive, brdrive;
 
     @Override
     public void runOpMode() throws InterruptedException
     {
-        flDrive  = hardwareMap.get(DcMotor.class, "fl_drive");
-        frDrive  = hardwareMap.get(DcMotor.class, "fr_drive");
-        brDrive = hardwareMap.get(DcMotor.class, "br_drive");
-        blDrive = hardwareMap.get(DcMotor.class, "bl_drive");
+        fldrive  = hardwareMap.get(DcMotor.class, "fl_drive");
+        frdrive  = hardwareMap.get(DcMotor.class, "fr_drive");
+        brdrive = hardwareMap.get(DcMotor.class, "br_drive");
+        bldrive = hardwareMap.get(DcMotor.class, "bl_drive");
 
-        flDrive.setDirection(DcMotor.Direction.FORWARD);
-        frDrive.setDirection(DcMotor.Direction.REVERSE);
-        brDrive.setDirection(DcMotor.Direction.REVERSE);
-        blDrive.setDirection(DcMotor.Direction.FORWARD);
+        fldrive.setDirection(DcMotor.Direction.FORWARD);
+        frdrive.setDirection(DcMotor.Direction.REVERSE);
+        brdrive.setDirection(DcMotor.Direction.REVERSE);
+        bldrive.setDirection(DcMotor.Direction.FORWARD);
 
         // reset encoder count kept by left motor.
-        flDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        frDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        blDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        brDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
 
         // set motors to run to target encoder position and stop with brakes on.
-        flDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        frDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        blDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        brDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        fldrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frdrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        bldrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        brdrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         // set right motor to run without regard to an encoder.
         //rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -58,52 +55,84 @@ public class DriveWithEncoder extends LinearOpMode
 
         // wait while opmode is active and left motor is busy running to position.
 
-        while (opModeIsActive() && flDrive.isBusy()) {
-            telemetry.addData("encoder-fwd", flDrive.getCurrentPosition() + "  busy=" + flDrive.isBusy());
-            telemetry.update();
-            idle();
-        }
+        public void forward(double power, long wait_time) {
+            fldrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            frdrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            bldrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            brdrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            fldrive.setPower(power);
+            frdrive.setPower(power);
+            brdrive.setPower(power);
+            bldrive.setPower(power);
+            sleep(wait_time);
+            power = 0.0;
+            fldrive.setPower(power);
+            frdrive.setPower(power);
+            brdrive.setPower(power);
+            bldrive.setPower(power);
+    }
 
-        // wait 5 sec so you can observe the final encoder position.
+        public void backward(double power, long wait_time) {
+            fldrive.setPower(-power);
+            frdrive.setPower(-power);
+            brdrive.setPower(-power);
+            bldrive.setPower(-power);
+            sleep(wait_time);
+            power = 0.0;
+            fldrive.setPower(-power);
+            frdrive.setPower(-power);
+            brdrive.setPower(-power);
+            bldrive.setPower(-power);
+    }
 
-        resetStartTime();
+        public void left(double power, long wait_time) {
+        fldrive.setPower(-power);
+        frdrive.setPower(power);
+        brdrive.setPower(power);
+        bldrive.setPower(-power);
+        sleep(wait_time);
+        power = 0.0;
+        fldrive.setPower(-power);
+        frdrive.setPower(-power);
+        brdrive.setPower(-power);
+        bldrive.setPower(-power);
+    }
 
-        while (opModeIsActive() && getRuntime() < 5)
-        {
-            telemetry.addData("encoder-fwd-end", flDrive.getCurrentPosition() + "  busy=" + flDrive.isBusy());
-            telemetry.update();
-            idle();
-        }
-
-        // Now back up to starting point. In this example instead of
-        // having the motor monitor the encoder, we will monitor the encoder ourselves.
-
-        leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-        leftMotor.setPower(-0.25);
-        rightMotor.setPower(-0.25);
-
-        while (opModeIsActive() && flDrive.getCurrentPosition() > 0)
-        {
-            telemetry.addData("encoder-back", flDrive.getCurrentPosition());
-            telemetry.update();
-            idle();
-        }
-
-        // set motor power to zero to stop motors.
-
-        leftMotor.setPower(0.0);
-        rightMotor.setPower(0.0);
-
-        // wait 5 sec so you can observe the final encoder position.
-
-        resetStartTime();
-
-        while (opModeIsActive() && getRuntime() < 5)
-        {
-            telemetry.addData("encoder-back-end", flDrive.getCurrentPosition());
-            telemetry.update();
-            idle();
-        }
+        public void right(double power, long wait_time) {
+        fldrive.setPower(power);
+        frdrive.setPower(-power);
+        brdrive.setPower(-power);
+        bldrive.setPower(power);
+        sleep(wait_time);
+        power = 0.0;
+        fldrive.setPower(-power);
+        frdrive.setPower(-power);
+        brdrive.setPower(-power);
+        bldrive.setPower(-power);
+    }
+        public void strafeleft(double power, long wait_time) {
+        fldrive.setPower(-power);
+        frdrive.setPower(power);
+        brdrive.setPower(-power);
+        bldrive.setPower(power);
+        sleep(wait_time);
+        power = 0.0;
+        fldrive.setPower(power);
+        frdrive.setPower(power);
+        brdrive.setPower(power);
+        bldrive.setPower(power);
+    }
+        public void straferight(double power, long wait_time) {
+        fldrive.setPower(power);
+        frdrive.setPower(-power);
+        brdrive.setPower(power);
+        bldrive.setPower(-power);
+        sleep(wait_time);
+        power = 0.0;
+        fldrive.setPower(power);
+        frdrive.setPower(power);
+        brdrive.setPower(power);
+        bldrive.setPower(power);
+    }
     }
 }
