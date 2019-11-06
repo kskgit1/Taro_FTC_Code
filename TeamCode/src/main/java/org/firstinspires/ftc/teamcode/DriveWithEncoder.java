@@ -26,15 +26,6 @@ public class DriveWithEncoder extends LinearOpMode
         brdrive.setDirection(DcMotor.Direction.REVERSE);
         bldrive.setDirection(DcMotor.Direction.FORWARD);
 
-        // reset encoder count kept by left motor.
-
-
-        // set motors to run to target encoder position and stop with brakes on.
-        fldrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        frdrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        bldrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        brdrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
         // set right motor to run without regard to an encoder.
         //rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
@@ -59,6 +50,16 @@ public class DriveWithEncoder extends LinearOpMode
         frdrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         bldrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         brdrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        fldrive.setTargetPosition(distance);
+        frdrive.setTargetPosition(distance);
+        bldrive.setTargetPosition(distance);
+        brdrive.setTargetPosition(distance);
+
+        fldrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frdrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        bldrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        brdrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         fldrive.setPower(power);
         frdrive.setPower(power);
