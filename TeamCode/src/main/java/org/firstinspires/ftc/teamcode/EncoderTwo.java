@@ -9,11 +9,10 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
 
-@Autonomous(name="DriveWithEncoder", group="Exercises")
-public class DriveWithEncoder extends LinearOpMode
+@Autonomous(name="EncoderTwo", group="Exercises")
+public class EncoderTwo extends LinearOpMode
 {
     private DcMotor fldrive, frdrive, bldrive, brdrive;
-    int distance = 500;
     
     @Override
     public void runOpMode() throws InterruptedException {
@@ -36,6 +35,7 @@ public class DriveWithEncoder extends LinearOpMode
         // wait for start button.
 
         waitForStart();
+        forward(0.5, 1);
 
         telemetry.addData("Mode", "running");
         telemetry.update();
@@ -65,16 +65,15 @@ public class DriveWithEncoder extends LinearOpMode
         bldrive.setPower(power);
         
         //i'm not sure if we need this but save it just in case`
-        //while (fldrive.isBusy() && frdrive.isBusy() && br5drive.isBusy() && bldrive.isBusy())
-        //{
+        while (fldrive.isBusy() && frdrive.isBusy() && brdrive.isBusy() && bldrive.isBusy()) {
             //Wait until target position is reached
-        //}
+        }
         
-        power = 0.0;
-        fldrive.setPower(power);
-        frdrive.setPower(power);
-        brdrive.setPower(power);
-        bldrive.setPower(power);
+        //power = 0.0;
+        //fldrive.setPower(power);
+        //frdrive.setPower(power);
+        //brdrive.setPower(power);
+        //bldrive.setPower(power);
     }
 
     public void backward(double power, int distance) {
