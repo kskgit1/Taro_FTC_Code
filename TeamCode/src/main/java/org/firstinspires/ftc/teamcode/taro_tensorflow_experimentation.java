@@ -32,7 +32,7 @@ package org.firstinspires.ftc.teamcode;
 //import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
@@ -56,7 +56,7 @@ import java.util.List;
  * IMPORTANT: In order to use this OpMode, you need to obtain your own Vuforia license key as
  * is explained below.
  */
-@TeleOp(name = "taro_tensorflow_experimentation", group = "Concept")
+@Autonomous(name = "taro_tensorflow_experimentation", group = "Concept")
 //@Disabled
 public class taro_tensorflow_experimentation extends LinearOpMode {
     private static final String TFOD_MODEL_ASSET = "Skystone.tflite";
@@ -65,7 +65,7 @@ public class taro_tensorflow_experimentation extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor fldrive, frdrive, bldrive, brdrive;
-    Servo servo;
+    //Servo servo;
 
     double currentposition;
     double currentposition2;
@@ -107,7 +107,7 @@ public class taro_tensorflow_experimentation extends LinearOpMode {
         frdrive  = hardwareMap.get(DcMotor.class, "fr_drive");
         brdrive = hardwareMap.get(DcMotor.class, "br_drive");
         bldrive = hardwareMap.get(DcMotor.class, "bl_drive");
-        servo = hardwareMap.get(Servo.class, "arm");
+        //servo = hardwareMap.get(Servo.class, "arm");
 
         fldrive.setDirection(DcMotor.Direction.FORWARD);
         frdrive.setDirection(DcMotor.Direction.REVERSE);
@@ -135,7 +135,7 @@ public class taro_tensorflow_experimentation extends LinearOpMode {
 
         if (opModeIsActive()) {
             while (opModeIsActive()) {
-                strafeleft(0.5, 1000);
+                strafeleft(0.05, 1000);
                 if (tfod != null) {
                     // getUpdatedRecognitions() will return null if no new information is available since
                     // the last time that call was made.
@@ -145,10 +145,10 @@ public class taro_tensorflow_experimentation extends LinearOpMode {
                       // step through the list of recognitions and display boundary info.
                       int i = 0;
                       //actions to complete after recognized
-                       forward(0.5, 500);
-                       grab();
-                       backward(0.5, 500);
-                       right(0.5, 200);
+                       forward(0.1, 500);
+                       //grab();
+                       backward(0.1, 500);
+                       right(0.1, 200);
                       for (Recognition recognition : updatedRecognitions) {
                         telemetry.addData(String.format("label (%d)", i), recognition.getLabel());
                         telemetry.addData(String.format("  left,top (%d)", i), "%.03f , %.03f",
@@ -272,7 +272,7 @@ public class taro_tensorflow_experimentation extends LinearOpMode {
         brdrive.setPower(power);
         bldrive.setPower(power);
     }
-    public void release()
+    /*public void release()
     {
         if (currentposition == 0.0) // if arm is closed, make it open
         {
@@ -290,5 +290,5 @@ public class taro_tensorflow_experimentation extends LinearOpMode {
             currentposition = 0.0;
             sleep(150);
         }
-    }
+    }*/
 }
