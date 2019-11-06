@@ -37,7 +37,10 @@ public class MecanumAuto extends LinearOpMode{
 
         forward(0.5, 2000);
         backward(0.5, 2000);
+        left(0.5, 1000);
         right(0.5, 1000);
+        strafeleft(0.5,1000);
+        straferight(0.5,1000);
 
 
     }
