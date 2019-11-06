@@ -60,6 +60,9 @@ public class DriveWithEncoder extends LinearOpMode
         frdrive.setPower(power);
         brdrive.setPower(power);
         bldrive.setPower(power);
+
+        while fldrive.isBusy()
+
         power = 0.0;
         fldrive.setPower(power);
         frdrive.setPower(power);
