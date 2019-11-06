@@ -16,7 +16,7 @@ public class MecanumDriver extends LinearOpMode {
     Servo arm_bottom_servo;
     int increment = 0;
 
-    public void release(double currentposition)
+    /*public void release(double currentposition)
     {
 
         arm_bottom_servo.setPosition(currentposition);
@@ -25,8 +25,7 @@ public class MecanumDriver extends LinearOpMode {
     public void grab(double currentposition)
     {    // if arm is open, make it closed
 
-        arm_bottom_servo.setPosition(currentposition);
-    }
+    }*/
 
 
     @Override
@@ -76,13 +75,13 @@ public class MecanumDriver extends LinearOpMode {
             if(gamepad1.left_bumper)
             {
                 increment -= - 0.1;
-                grab(increment);
+                arm_bottom_servo.setPosition(increment);
             }
 
             if(gamepad1.right_bumper)
             {
                 increment += 0.1;
-                release(increment);
+                arm_bottom_servo.setPosition(increment);
             }
 
            /* if(gamepad2.x)
