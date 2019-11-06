@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
+import com.qualcomm.robotcore.hardware.Servo;
 
 
 @TeleOp(name = "MecanumDriver", group = "Linear OpMode")
@@ -12,6 +13,7 @@ public class MecanumDriver extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor flDrive, frDrive, blDrive, brDrive, flyDrive;
+    Servo arm_bottom_servo;
 
     @Override
     public void runOpMode() {
@@ -64,10 +66,30 @@ public class MecanumDriver extends LinearOpMode {
                flydrive.setPower(0.0); 
             }*/
 
-
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Motors", "left (%.2f), right (%.2f)", f_left, f_right, b_left, b_right);
             telemetry.update();
         }
+
+        public void release()
+        {
+            if (currentposition == 0.0) // if arm is closed, make it open
+            {
+                currentposition = 0.5;
+                sleep(150);
+            }
+            arm_bottom_servo.setPosition(currentposition);
+        }
+
+        public void grab()
+        {    // if arm is open, make it closed
+
+            if (currentposition2 == 0.5)
+            {
+                currentposition = 0.0;
+                sleep(150);
+            }
+        }
+
     }
 }
