@@ -35,6 +35,7 @@ public class DriveWithEncoder extends LinearOpMode
         // wait for start button.
 
         waitForStart();
+        forward(0.1, 2000);
 
         telemetry.addData("Mode", "running");
         telemetry.update();
@@ -65,6 +66,9 @@ public class DriveWithEncoder extends LinearOpMode
         frdrive.setPower(power);
         brdrive.setPower(power);
         bldrive.setPower(power);
+        while (fldrive.isBusy() && frdrive.isBusy() && bldrive.isBusy() && brdrive.isBusy()) {
+            //until point reached
+        }
         power = 0.0;
         fldrive.setPower(power);
         frdrive.setPower(power);
@@ -73,10 +77,30 @@ public class DriveWithEncoder extends LinearOpMode
     }
 
     public void backward(double power, int distance) {
+        fldrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frdrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        bldrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        brdrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        fldrive.setTargetPosition(-distance);
+        frdrive.setTargetPosition(-distance);
+        bldrive.setTargetPosition(-distance);
+        brdrive.setTargetPosition(-distance);
+
+        fldrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frdrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        bldrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        brdrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
         fldrive.setPower(-power);
         frdrive.setPower(-power);
         brdrive.setPower(-power);
         bldrive.setPower(-power);
+
+        while (fldrive.isBusy() && frdrive.isBusy() && bldrive.isBusy() && brdrive.isBusy()) {
+            //until point reached
+        }
+
         power = 0.0;
         fldrive.setPower(-power);
         frdrive.setPower(-power);
@@ -85,22 +109,62 @@ public class DriveWithEncoder extends LinearOpMode
     }
 
     public void left(double power, int distance) {
+        fldrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frdrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        bldrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        brdrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        fldrive.setTargetPosition(-distance);
+        frdrive.setTargetPosition(distance);
+        bldrive.setTargetPosition(distance);
+        brdrive.setTargetPosition(-distance);
+
+        fldrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frdrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        bldrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        brdrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
         fldrive.setPower(-power);
         frdrive.setPower(power);
         brdrive.setPower(power);
         bldrive.setPower(-power);
+
+        while (fldrive.isBusy() && frdrive.isBusy() && bldrive.isBusy() && brdrive.isBusy()) {
+            //until point reached
+        }
+
         power = 0.0;
-        fldrive.setPower(-power);
-        frdrive.setPower(-power);
-        brdrive.setPower(-power);
-        bldrive.setPower(-power);
+        fldrive.setPower(power);
+        frdrive.setPower(power);
+        brdrive.setPower(power);
+        bldrive.setPower(power);
     }
 
     public void right(double power, int distance) {
+        fldrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frdrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        bldrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        brdrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        fldrive.setTargetPosition(distance);
+        frdrive.setTargetPosition(-distance);
+        bldrive.setTargetPosition(-distance);
+        brdrive.setTargetPosition(distance);
+
+        fldrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frdrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        bldrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        brdrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
         fldrive.setPower(power);
         frdrive.setPower(-power);
         brdrive.setPower(-power);
         bldrive.setPower(power);
+
+        while (fldrive.isBusy() && frdrive.isBusy() && bldrive.isBusy() && brdrive.isBusy()) {
+            //until point reached
+        }
+
         power = 0.0;
         fldrive.setPower(-power);
         frdrive.setPower(-power);
@@ -108,10 +172,30 @@ public class DriveWithEncoder extends LinearOpMode
         bldrive.setPower(-power);
     }
     public void strafeleft(double power, int distance) {
+        fldrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frdrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        bldrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        brdrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        fldrive.setTargetPosition(-distance);
+        frdrive.setTargetPosition(distance);
+        bldrive.setTargetPosition(-distance);
+        brdrive.setTargetPosition(distance);
+
+        fldrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frdrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        bldrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        brdrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
         fldrive.setPower(-power);
         frdrive.setPower(power);
         brdrive.setPower(-power);
         bldrive.setPower(power);
+
+        while (fldrive.isBusy() && frdrive.isBusy() && bldrive.isBusy() && brdrive.isBusy()) {
+            //until point reached
+        }
+
         power = 0.0;
         fldrive.setPower(power);
         frdrive.setPower(power);
@@ -119,10 +203,30 @@ public class DriveWithEncoder extends LinearOpMode
         bldrive.setPower(power);
     }
     public void straferight(double power, int distance) {
+        fldrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frdrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        bldrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        brdrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        fldrive.setTargetPosition(distance);
+        frdrive.setTargetPosition(-distance);
+        bldrive.setTargetPosition(distance);
+        brdrive.setTargetPosition(-distance);
+
+        fldrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frdrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        bldrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        brdrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
         fldrive.setPower(power);
         frdrive.setPower(-power);
         brdrive.setPower(power);
         bldrive.setPower(-power);
+
+        while (fldrive.isBusy() && frdrive.isBusy() && bldrive.isBusy() && brdrive.isBusy()) {
+            //until point reached
+        }
+
         power = 0.0;
         fldrive.setPower(power);
         frdrive.setPower(power);
