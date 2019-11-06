@@ -38,7 +38,7 @@ public class DriveWithEncoder extends LinearOpMode
 
         telemetry.addData("Mode", "running");
         telemetry.update();
-        
+
     }
     public void forward(double power, int distance) {
         fldrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
