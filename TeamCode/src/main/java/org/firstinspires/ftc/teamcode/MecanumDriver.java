@@ -14,11 +14,27 @@ public class MecanumDriver extends LinearOpMode {
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor flDrive, frDrive, blDrive, brDrive, flyDrive;
     Servo arm_bottom_servo;
+    int increment = 0;
+
+    public void release(double currentposition)
+    {
+
+        arm_bottom_servo.setPosition(currentposition);
+    }
+
+    public void grab(double currentposition)
+    {    // if arm is open, make it closed
+
+        arm_bottom_servo.setPosition(currentposition);
+    }
+
 
     @Override
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
+
+        arm_bottom_servo = hardwareMap.get(Servo.class, "arm");
 
         flDrive = hardwareMap.get(DcMotor.class, "fl_drive");
         frDrive = hardwareMap.get(DcMotor.class, "fr_drive");
@@ -56,6 +72,19 @@ public class MecanumDriver extends LinearOpMode {
             brDrive.setPower(Range.clip(b_right, -1.0, 1.0));
             blDrive.setPower(Range.clip(b_left, -1.0, 1.0));
             
+
+            if(gamepad1.left_bumper)
+            {
+                increment -= - 0.1;
+                grab(increment);
+            }
+
+            if(gamepad1.right_bumper)
+            {
+                increment += 0.1;
+                release(increment);
+            }
+
            /* if(gamepad2.x)
             {
                flydrive.setPower(0.7); 
@@ -71,25 +100,6 @@ public class MecanumDriver extends LinearOpMode {
             telemetry.update();
         }
 
-        public void release()
-        {
-            if (currentposition == 0.0) // if arm is closed, make it open
-            {
-                currentposition = 0.5;
-                sleep(150);
-            }
-            arm_bottom_servo.setPosition(currentposition);
-        }
-
-        public void grab()
-        {    // if arm is open, make it closed
-
-            if (currentposition2 == 0.5)
-            {
-                currentposition = 0.0;
-                sleep(150);
-            }
-        }
 
     }
 }
