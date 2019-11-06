@@ -45,10 +45,10 @@ public class MecanumAuto extends LinearOpMode{
 
     }
     public void forward(double power, long wait_time) {
-        fldrive.setPower(-power);
-        frdrive.setPower(-power);
-        brdrive.setPower(-power);
-        bldrive.setPower(-power);
+        fldrive.setPower(power);
+        frdrive.setPower(power);
+        brdrive.setPower(power);
+        bldrive.setPower(power);
         sleep(wait_time);
         power = 0.0;
         fldrive.setPower(power);
@@ -58,10 +58,10 @@ public class MecanumAuto extends LinearOpMode{
     }
 
     public void backward(double power, long wait_time) {
-        fldrive.setPower(power);
-        frdrive.setPower(power);
-        brdrive.setPower(power);
-        bldrive.setPower(power);
+        fldrive.setPower(-power);
+        frdrive.setPower(-power);
+        brdrive.setPower(-power);
+        bldrive.setPower(-power);
         sleep(wait_time);
         power = 0.0;
         fldrive.setPower(-power);
@@ -71,10 +71,10 @@ public class MecanumAuto extends LinearOpMode{
     }
 
     public void left(double power, long wait_time) {
-        fldrive.setPower(power);
-        frdrive.setPower(-power);
-        brdrive.setPower(-power);
-        bldrive.setPower(power);
+        fldrive.setPower(-power);
+        frdrive.setPower(power);
+        brdrive.setPower(power);
+        bldrive.setPower(-power);
         sleep(wait_time);
         power = 0.0;
         fldrive.setPower(-power);
@@ -84,10 +84,10 @@ public class MecanumAuto extends LinearOpMode{
     }
 
     public void right(double power, long wait_time) {
-        fldrive.setPower(-power);
-        frdrive.setPower(power);
-        brdrive.setPower(power);
-        bldrive.setPower(-power);
+        fldrive.setPower(power);
+        frdrive.setPower(-power);
+        brdrive.setPower(-power);
+        bldrive.setPower(power);
         sleep(wait_time);
         power = 0.0;
         fldrive.setPower(-power);
@@ -96,10 +96,10 @@ public class MecanumAuto extends LinearOpMode{
         bldrive.setPower(-power);
     }
     public void strafeleft(double power, long wait_time) {
-        fldrive.setPower(power);
-        frdrive.setPower(-power);
-        brdrive.setPower(power);
-        bldrive.setPower(-power);
+        fldrive.setPower(-power);
+        frdrive.setPower(power);
+        brdrive.setPower(-power);
+        bldrive.setPower(power);
         sleep(wait_time);
         power = 0.0;
         fldrive.setPower(power);
@@ -108,10 +108,10 @@ public class MecanumAuto extends LinearOpMode{
         bldrive.setPower(power);
     }
     public void straferight(double power, long wait_time) {
-        fldrive.setPower(-power);
-        frdrive.setPower(power);
-        brdrive.setPower(-power);
-        bldrive.setPower(power);
+        fldrive.setPower(power);
+        frdrive.setPower(-power);
+        brdrive.setPower(power);
+        bldrive.setPower(-power);
         sleep(wait_time);
         power = 0.0;
         fldrive.setPower(power);
