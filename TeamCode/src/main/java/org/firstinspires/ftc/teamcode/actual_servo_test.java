@@ -49,6 +49,7 @@ import com.qualcomm.robotcore.hardware.Servo;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 @TeleOp(name = "actual_servo_test", group = "Linear OpMode")
+@Disabled
 
 public class actual_servo_test extends LinearOpMode {
 
