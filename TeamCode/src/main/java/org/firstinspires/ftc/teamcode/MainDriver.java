@@ -8,13 +8,13 @@ import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.robotcore.hardware.Servo;
 
 
-@TeleOp(name = "MecanumDriver", group = "Linear OpMode")
-public class MecanumDriver extends LinearOpMode {
+@TeleOp(name = "MainDriver", group = "Linear OpMode")
+public class MainDriver extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor flDrive, frDrive, blDrive, brDrive, flyDrive;
-    Servo arm_bottom_servo;
-    int increment = 0;
+    private DcMotor flDrive, frDrive, blDrive, brDrive, flyWheel, back_Slide, left_Slide, top_Slide;
+    Servo arm_servo, hand_servo, head_servo, hair_1, hair_2;
+    int currentposition = 0;
 
     /*public void release(double currentposition)
     {
@@ -32,7 +32,9 @@ public class MecanumDriver extends LinearOpMode {
 
         arm_servo = hardwareMap.get(Servo.class, "arm");
         hand_servo = hardwareMap.get(Servo.class, "hand");
-        clamp_servo = hardwareMap.get(Servo.class, "clamp");
+        head_servo = hardwareMap.get(Servo.class, "head");
+        clamp_1 = hardwareMap.get(Servo.class, "hair1");
+        clamp_2 = hardwareMap.get(Servo.class, "hair2");
 
         flDrive = hardwareMap.get(DcMotor.class, "fl_drive");
         frDrive = hardwareMap.get(DcMotor.class, "fr_drive");
@@ -48,6 +50,9 @@ public class MecanumDriver extends LinearOpMode {
         brDrive.setDirection(DcMotor.Direction.REVERSE);
         blDrive.setDirection(DcMotor.Direction.FORWARD);
         flyWheel.setDirection(DcMotor.Direction.FORWARD);
+        backSlide.setDirection(DcMotor.Direction.FORWARD);
+        leftSlide.setDirection(DcMotor.Direction.FORWARD);
+        topSlide.setDirection(DcMotor.Direction.FORWARD);
 
         waitForStart();
         runtime.reset();
@@ -57,33 +62,45 @@ public class MecanumDriver extends LinearOpMode {
             double Speed = -gamepad1.left_stick_y;
             double Turn = gamepad1.right_stick_x;
             double Strafe = gamepad1.left_stick_x;
+            double Lift = gamepad2.left_stick_y;
+            double Place = gamepad2.right_stick_x;
+          
 
             double f_left;
             double f_right;
             double b_left;
             double b_right;
+            double back_Slide;
+            double left_Slide;
+            double top_Slide;
 
             f_left = Speed + Turn + Strafe;
             f_right = Speed - Turn - Strafe;
             b_right = Speed - Turn + Strafe;
             b_left = Speed + Turn - Strafe;
+            back_Slide = Lift;
+            left_Slide = Lift;
+            top_Slide = Place;
 
             flDrive.setPower(Range.clip(f_left, -1.0, 1.0));
             frDrive.setPower(Range.clip(f_right, -1.0, 1.0));
             brDrive.setPower(Range.clip(b_right, -1.0, 1.0));
             blDrive.setPower(Range.clip(b_left, -1.0, 1.0));
+            backSlide.setPower(Range.clip(back_slide, -1.0, 1.0));
+            leftSlide.setPower(Range.clip(left_slide, -1.0, 1.0));
+            topSlide.setPower(Range.clip(top_slide, -1.0, 1.0));
             
 
             if(gamepad1.left_bumper)
             {
-                increment -= - 0.1;
-                arm_bottom_servo.setPosition(increment);
+                currentposition -= - 0.1;
+                arm_servo.setPosition(currentposition);
             }
 
             if(gamepad1.right_bumper)
             {
-                increment += 0.1;
-                arm_bottom_servo.setPosition(increment);
+                currentposition += 0.1;
+                arm_servo.setPosition(currentposition);
             }
 
            /* if(gamepad2.x)
