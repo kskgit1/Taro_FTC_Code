@@ -16,6 +16,7 @@ public class MainDriver extends LinearOpMode {
     Servo arm_servo, hand_servo, head_servo, hair_1, hair_2;
     double currentposition_arm = 0;
     double currentposition_hand = 0;
+    double currentposition_head = 0;
 
 
     @Override
@@ -26,8 +27,8 @@ public class MainDriver extends LinearOpMode {
         arm_servo = hardwareMap.get(Servo.class, "arm");
         hand_servo = hardwareMap.get(Servo.class, "hand");
         head_servo = hardwareMap.get(Servo.class, "head");
-        hair_1 = hardwareMap.get(Servo.class, "hair1");
-        hair_2 = hardwareMap.get(Servo.class, "hair2");
+        hair1_servo = hardwareMap.get(Servo.class, "hair1");
+        hair2_servo = hardwareMap.get(Servo.class, "hair2");
 
         flDrive = hardwareMap.get(DcMotor.class, "fl_drive");
         frDrive = hardwareMap.get(DcMotor.class, "fr_drive");
@@ -83,40 +84,66 @@ public class MainDriver extends LinearOpMode {
             left_Slide.setPower(Range.clip(left_slide, -1.0, 1.0));
             top_Slide.setPower(Range.clip(top_slide, -1.0, 1.0));
             
+            
+            while(gamepad1.a)
+            {
+               if (flyWheel.setPower(0.7));
+                {
+                    flyWheel.setPower(0.0);   
+                }
+                else 
+                {
+                    flyWheel.setPower(0.7);
+                }
+            }
+            
 
-            if(gamepad1.left_bumper)
+            if(gamepad1.dpad_down)
             {
                 currentposition_arm = currentposition_arm - 0.1;
                 arm_servo.setPosition(currentposition_arm);
             }
 
-            if(gamepad1.right_bumper)
+            if(gamepad1.dpad_up)
             {
                 currentposition_arm = currentposition_arm + 0.1;
                 arm_servo.setPosition(currentposition_arm);
             }
 
-            if(gamepad1.dpad_down)
+            if(gamepad1.left_bumper)
             {
                 currentposition_hand = currentposition_hand - 0.1;
-                arm_servo.setPosition(currentposition_hand);
+                hand_servo.setPosition(currentposition_hand);
             }
 
-            if(gamepad1.dpad_up)
+            if(gamepad1.right_bumper)
             {
                 currentposition_hand = currentposition_hand + 0.1;
-                arm_servo.setPosition(currentposition_hand);
+                hand_servo.setPosition(currentposition_hand);
             }
 
-            while(gamepad2.x)
+            if(gamepad2.left_bumper)
             {
-               flyWheel.setPower(0.7);
+                currentposition_head = currentposition_head - 0.1;
+                head_servo.setPosition(currentposition_hand);
             }
             
-             if(gamepad2.y)
+            if(gamepad2.right_bumper)
             {
-               flyWheel.setPower(0.0);
+                currentposition_head = currentposition_head + 0.1;
+                head_servo.setPosition(currentposition_head);
+                
             }
+            
+            if(gamepad2.a)
+            {
+                  hair1_servo.setPosition(0.5);
+            }
+            if(gamepad2.a)
+            {
+                  hair2_servo.setPosition(0.5);
+            }
+            
 
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Motors", "left (%.2f), right (%.2f)", f_left, f_right, b_left, b_right);
