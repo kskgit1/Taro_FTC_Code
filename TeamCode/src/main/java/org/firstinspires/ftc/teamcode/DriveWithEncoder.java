@@ -35,7 +35,7 @@ public class DriveWithEncoder extends LinearOpMode
         // wait for start button.
 
         waitForStart();
-        forward(0.1, 2000);
+        forward(0.1, 1);
 
         telemetry.addData("Mode", "running");
         telemetry.update();
