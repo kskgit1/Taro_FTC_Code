@@ -12,9 +12,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class MainDriver extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor flDrive, frDrive, blDrive, brDrive, flyWheel, back_Slide, left_Slide, top_Slide;
-    Servo arm_servo, hand_servo, head_servo, hair_1, hair_2;
-    double currentposition_arm = 0;
+    private DcMotor flDrive, frDrive, blDrive, brDrive, flyWheel, back_Slide, left_Slide, top_Slide; // initialize all motors
+    Servo arm_servo, hand_servo, head_servo, hair_1, hair_2; // initialize all servos
+    double currentposition_arm = 0;  // currentpositions for arm, hand, and head servos
     double currentposition_hand = 0;
     double currentposition_head = 0;
 
@@ -56,8 +56,8 @@ public class MainDriver extends LinearOpMode {
             double Speed = -gamepad1.left_stick_y;
             double Turn = gamepad1.right_stick_x;
             double Strafe = gamepad1.left_stick_x;
-            double Lift = gamepad2.left_stick_y;
-            double Place = gamepad2.right_stick_x;
+            double Lift = gamepad2.left_stick_y;    // using linear slides
+            double Place = gamepad2.right_stick_x;  // using top slide
           
 
             double f_left;
@@ -85,7 +85,7 @@ public class MainDriver extends LinearOpMode {
             top_Slide.setPower(Range.clip(top_slide, -1.0, 1.0));
             
             
-            while(gamepad1.a)
+            while(gamepad1.a)  // toggle switch for flywheel motor
             {
                if (flyWheel.setPower(0.7));
                 {
@@ -98,44 +98,44 @@ public class MainDriver extends LinearOpMode {
             }
             
 
-            if(gamepad1.dpad_down)
+            if(gamepad1.dpad_down) // reduce servo position for arm
             {
                 currentposition_arm = currentposition_arm - 0.1;
                 arm_servo.setPosition(currentposition_arm);
             }
 
-            if(gamepad1.dpad_up)
+            if(gamepad1.dpad_up  // increase servo position for arm
             {
                 currentposition_arm = currentposition_arm + 0.1;
                 arm_servo.setPosition(currentposition_arm);
             }
 
-            if(gamepad1.left_bumper)
+            if(gamepad1.left_bumper)  // reduce servo position for hand
             {
                 currentposition_hand = currentposition_hand - 0.1;
                 hand_servo.setPosition(currentposition_hand);
             }
 
-            if(gamepad1.right_bumper)
+            if(gamepad1.right_bumper) // increase servo position for hand
             {
                 currentposition_hand = currentposition_hand + 0.1;
                 hand_servo.setPosition(currentposition_hand);
             }
 
-            if(gamepad2.left_bumper)
+            if(gamepad2.left_bumper)  // turn head servo one way
             {
                 currentposition_head = currentposition_head - 0.1;
                 head_servo.setPosition(currentposition_hand);
             }
             
-            if(gamepad2.right_bumper)
+            if(gamepad2.right_bumper)  // turn head servo other way
             {
                 currentposition_head = currentposition_head + 0.1;
                 head_servo.setPosition(currentposition_head);
                 
             }
             
-            if(gamepad2.a)
+            if(gamepad2.a)   // clamp both servos at same time
             {
                   hair1_servo.setPosition(0.5);
             }
