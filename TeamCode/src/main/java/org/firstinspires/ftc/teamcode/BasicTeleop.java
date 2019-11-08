@@ -40,7 +40,7 @@ import com.qualcomm.robotcore.util.Range;
 @TeleOp(name="BasicTeleop", group="Linear Opmode")
 public class BasicTeleop extends LinearOpMode {
 
-    // Declare OpMode members.
+    //Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor flDrive, frDrive, blDrive, brDrive;
 
@@ -49,36 +49,35 @@ public class BasicTeleop extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-        // Initialize the hardware variables. Note that the strings used here as parameters
-        // to 'get' must correspond to the names assigned during the robot configuration
-        // step (using the FTC Robot Controller app on the phone).
+        //Initialize the hardware variables. Note that the strings used here as parameters
+        //To 'get' must correspond to the names assigned during the robot configuration
         flDrive  = hardwareMap.get(DcMotor.class, "fl_drive");
         frDrive  = hardwareMap.get(DcMotor.class, "fr_drive");
         brDrive = hardwareMap.get(DcMotor.class, "br_drive");
         blDrive = hardwareMap.get(DcMotor.class, "bl_drive");
 
-        // Most robots need the motor on one side to be reversed to drive forward
-        // Reverse the motor that runs backwards when connected directly to the battery
+        //Most robots need the motor on one side to be reversed to drive forward
+        //Reverse the motor that runs backwards when connected directly to the battery
         flDrive.setDirection(DcMotor.Direction.FORWARD);
         frDrive.setDirection(DcMotor.Direction.REVERSE);
         brDrive.setDirection(DcMotor.Direction.REVERSE);
         blDrive.setDirection(DcMotor.Direction.FORWARD);
 
-        // Wait for the game to start (driver presses PLAY)
+        //Wait for the game to start (driver presses PLAY)
         waitForStart();
         runtime.reset();
 
-        // run until the end of the match (driver presses STOP)
+        //Run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
 
-            // Setup a variable for each drive wheel to save power level for telemetry
+            //Setup a variable for each drive wheel to save power level for telemetry
             double leftPower;
             double rightPower;
 
-            // Choose to drive using either Tank Mode, or POV Mode
-            // Comment out the method that's not used.  The default below is POV.
+            //Choose to drive using either Tank Mode, or POV Mode
+            //Comment out the method that's not used.  The default below is POV.
 
-            // POV Mode uses left stick to go forward, and right stick to turn.
+            //POV Mode uses left stick to go forward, and right stick to turn.
             // - This uses basic math to combine motions and is easier to drive straight.
             double drive = -gamepad1.left_stick_y;
             double turn  =  gamepad1.right_stick_x;
