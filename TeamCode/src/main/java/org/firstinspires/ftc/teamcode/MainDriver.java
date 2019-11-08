@@ -98,14 +98,14 @@ public class MainDriver extends LinearOpMode {
 
             if(gamepad1.dpad_down)
             {
-                currentposition_arm = currentposition_arm - 0.1;
-                arm_servo.setPosition(currentposition_arm);
+                currentposition_hand = currentposition_hand - 0.1;
+                arm_servo.setPosition(currentposition_hand);
             }
 
             if(gamepad1.dpad_up)
             {
-                currentposition_arm = currentposition_arm + 0.1;
-                arm_servo.setPosition(currentposition_arm);
+                currentposition_hand = currentposition_hand + 0.1;
+                arm_servo.setPosition(currentposition_hand);
             }
 
             while(gamepad2.x)
