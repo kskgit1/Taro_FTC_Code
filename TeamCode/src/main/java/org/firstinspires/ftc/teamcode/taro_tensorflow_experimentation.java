@@ -46,16 +46,6 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import java.util.List;
 
-/**
- * This 2019-2020 OpMode illustrates the basics of using the TensorFlow Object Detection API to
- * determine the position of the Skystone game elements.
- *
- * Use Android Studio to Copy this Class, and Paste it into your team's code folder with a new name.
- * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list.
- *
- * IMPORTANT: In order to use this OpMode, you need to obtain your own Vuforia license key as
- * is explained below.
- */
 @Autonomous(name = "taro_tensorflow_experimentation", group = "Concept")
 //@Disabled
 public class taro_tensorflow_experimentation extends LinearOpMode {
@@ -67,21 +57,6 @@ public class taro_tensorflow_experimentation extends LinearOpMode {
     private DcMotor fldrive, frdrive, bldrive, brdrive;
     //Servo servo;
 
-    double currentposition;
-    double currentposition2;
-
-    /*
-     * IMPORTANT: You need to obtain your own license key to use Vuforia. The string below with which
-     * 'parameters.vuforiaLicenseKey' is initialized is for illustration only, and will not function.
-     * A Vuforia 'Development' license key, can be obtained free of charge from the Vuforia developer
-     * web site at https://developer.vuforia.com/license-manager.
-     *
-     * Vuforia license keys are always 380 characters long, and look as if they contain mostly
-     * random data. As an example, here is a example of a fragment of a valid key:
-     *      ... yIgIzTqZ4mWjk9wd3cZO9T1axEqzuhxoGlfOOI2dRzKS4T0hQ8kT ...
-     * Once you've obtained a license key, copy the string from the Vuforia web site
-     * and paste it in to your code on the next line, between the double quotes.
-     */
     private static final String VUFORIA_KEY =
             "ARZSVjv/////AAABmbFVYMvEBEg1i14c/gYXU1QSxd7JrRov3nzCufUBnZaW+W4Brt9ma44NYvvCTPjEI6yKKvf+tHXE21sApVu52FWz2R7IXb3dUcnL8omF+I3/kH2tmCp+Ps+dygy16NJo2ZPwJe5RNTui0EJ9x6AvNz8z9UdZjMpCwTCWwZ57NW3iXWjFYRRU8sEb0Yb31uQUeN7612t8inQXvPVzTeJAW2A5u48T2alsmVw/Z9vKDmUATi1LgVNwuKa8krGlGBa2joNnt81JqOSuWotWTICmC6W6ZEqiYedlAcCTAZWSDmekIXa8m+espguXv16FzkcJAiq62FxMUFGw+aNKjnyCsubOoIRRwq2k1RZ8K9FveEUF";
 
@@ -107,7 +82,6 @@ public class taro_tensorflow_experimentation extends LinearOpMode {
         frdrive  = hardwareMap.get(DcMotor.class, "fr_drive");
         brdrive = hardwareMap.get(DcMotor.class, "br_drive");
         bldrive = hardwareMap.get(DcMotor.class, "bl_drive");
-        //servo = hardwareMap.get(Servo.class, "arm");
 
         fldrive.setDirection(DcMotor.Direction.FORWARD);
         frdrive.setDirection(DcMotor.Direction.REVERSE);
@@ -382,23 +356,4 @@ public class taro_tensorflow_experimentation extends LinearOpMode {
         brdrive.setPower(power);
         bldrive.setPower(power);
     }
-    /*public void release()
-    {
-        if (currentposition == 0.0) // if arm is closed, make it open
-        {
-            currentposition = 0.5;
-            sleep(150);
-        }
-        servo.setPosition(currentposition);
-    }
-
-    public void grab()
-    {    // if arm is open, make it closed
-
-        if (currentposition2 == 0.5)
-        {
-            currentposition = 0.0;
-            sleep(150);
-        }
-    }*/
 }
