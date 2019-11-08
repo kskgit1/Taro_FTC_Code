@@ -40,11 +40,6 @@ public class DriveWithEncoder extends LinearOpMode
         telemetry.addData("Mode", "running");
         telemetry.update();
 
-        //set left motor to run to 5000 encoder counts.
-
-        //leftMotor.setTargetPosition(5000);
-
-        // wait while opmode is active and left motor is busy running to position.
     }
     public void forward(double power, int distance) {
         fldrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -66,9 +61,11 @@ public class DriveWithEncoder extends LinearOpMode
         frdrive.setPower(power);
         brdrive.setPower(power);
         bldrive.setPower(power);
+
         while (fldrive.isBusy() && frdrive.isBusy() && bldrive.isBusy() && brdrive.isBusy()) {
             //until point reached
         }
+
         power = 0.0;
         fldrive.setPower(power);
         frdrive.setPower(power);
