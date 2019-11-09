@@ -86,7 +86,7 @@ public class MainDriver extends LinearOpMode {
             f_right = Speed - Turn - Strafe;
             b_right = Speed - Turn + Strafe;
             b_left = Speed + Turn - Strafe;
-            fly_Wheel = Catch;
+            fly_wheel = Catch;
             back_slide = Lift;
             left_slide = Lift;
             top_slide = Place;
@@ -148,7 +148,7 @@ public class MainDriver extends LinearOpMode {
             //servos in action: hair1 and hair2
             if(gamepad2.a)   
             {
-                if(currentposition_hair1 = 0)
+                if(currentposition_hair1 == 0)
                 {
                     currentposition_hair1 = 0.5;
                     hair1_servo.setPosition(currentposition_hair1);
@@ -161,15 +161,15 @@ public class MainDriver extends LinearOpMode {
                 
             if(gamepad2.a)
             {
-                if(currentposition_hair2 = 0)
+                if(currentposition_hair2 == 0)
                 {
-                    currentpostion_hair2 = 0.5;
+                    currentposition_hair2 = 0.5;
                     hair2_servo.setPosition(currentposition_hair2);
                 }
                 else
                 {
                     currentposition_hair2 = 0;
-                    hair_2servo.setPosition(currentposition_hair2);
+                    hair2_servo.setPosition(currentposition_hair2);
                 }
                 
             }
