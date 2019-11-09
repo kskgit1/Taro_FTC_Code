@@ -68,7 +68,7 @@ public class MainDriver extends LinearOpMode {
             double Speed = -gamepad1.left_stick_y;
             double Turn = gamepad1.right_stick_x;
             double Strafe = gamepad1.left_stick_x;
-            double Catch = gamepad1.right_trigger;
+            double Catch = gamepad1.right_trigger;  // using flywheel
             double Lift = gamepad2.left_stick_y;    // using linear slides
             double Place = gamepad2.right_stick_x;  // using top slide
           
