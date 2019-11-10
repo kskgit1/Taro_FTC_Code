@@ -18,7 +18,8 @@ public class MainDriver extends LinearOpMode {
     private DcMotor flDrive, frDrive, blDrive, brDrive, fly_Wheel, back_Slide, left_Slide, top_Slide; // initialize all motors
     //these below servos are named to mimic a human body. the comment next to it explains the role/ position
     //intialize all servos
-    Servo arm_servo, hand_servo, head_servo, hair_servo;
+    Servo head_servo, hair_servo;
+    //Servo arm_servo, hand_servo;
     //currentpositions for arm, hand, head, and hair servos
     double currentposition_arm = 0; //arm: small arm on the side
     double currentposition_hand = 0; //hand: servo on the top of the arm servo
@@ -33,8 +34,8 @@ public class MainDriver extends LinearOpMode {
         telemetry.update();
 
         //to 'get' must correspond to the names assigned during robot config       
-        arm_servo = hardwareMap.get(Servo.class, "arm");
-        hand_servo = hardwareMap.get(Servo.class, "hand");
+        //arm_servo = hardwareMap.get(Servo.class, "arm");
+        //hand_servo = hardwareMap.get(Servo.class, "hand");
         head_servo = hardwareMap.get(Servo.class, "head");
         hair_servo = hardwareMap.get(Servo.class, "hair");
 
@@ -100,7 +101,7 @@ public class MainDriver extends LinearOpMode {
             left_Slide.setPower(Range.clip(left_slide, -1.0, 1.0));
             top_Slide.setPower(Range.clip(top_slide, -1.0, 1.0));
             
-            if (gamepad1.right_stick_button){
+            if (gamepad1.a){
                 if (slow_mode){
                     speed_power = 0.1;
                 }
@@ -111,7 +112,7 @@ public class MainDriver extends LinearOpMode {
             }
 
 
-            if(gamepad1.a) // reduce servo position for arm
+            /*if(gamepad1.a) // reduce servo position for arm
             {
                 currentposition_arm = currentposition_arm - 0.1;
                 arm_servo.setPosition(currentposition_arm);
@@ -136,13 +137,15 @@ public class MainDriver extends LinearOpMode {
                 currentposition_hand = currentposition_hand + 0.1;
                 hand_servo.setPosition(currentposition_hand);
             }
+            */
+
 
             //if the Left Bumper on Gamepad 2 is pressed, then the servo will turn counterclockwise
             //servos in action: head
             if(gamepad2.left_bumper)
             {
                 currentposition_head = currentposition_head - 0.1;
-                head_servo.setPosition(currentposition_hand);
+                head_servo.setPosition(currentposition_head);
             }
             
             //if the Right Bumper on Gamepad 2 is pressed, then the servo will turn clockwise
@@ -153,7 +156,7 @@ public class MainDriver extends LinearOpMode {
                 head_servo.setPosition(currentposition_head);
                 
             }
-            
+
             //if A on Gamepad 2 is pressed, then both servos will be clamped at the same time 
             //servos in action: hair1 and hair2
             if(gamepad2.a)   
