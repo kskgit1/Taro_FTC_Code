@@ -76,11 +76,10 @@ public class taro_tensorflow_experimentation extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        // The TFObjectDetector uses the camera frames from the VuforiaLocalizer, so we create that
-        // first.
+        // The TFObjectDetector uses the camera frames from the VuforiaLocalizer, so we create that first.
+
         initVuforia();
 
-        //
         fldrive  = hardwareMap.get(DcMotor.class, "fl_drive");
         frdrive  = hardwareMap.get(DcMotor.class, "fr_drive");
         brdrive = hardwareMap.get(DcMotor.class, "br_drive");
@@ -114,7 +113,7 @@ public class taro_tensorflow_experimentation extends LinearOpMode {
         if (ClassFactory.getInstance().canCreateTFObjectDetector()) {
             initTfod();
         } else {
-            telemetry.addData("Sorry!", "This device is not compatible with TFOD");
+            telemetry.addData("Sorry!", "This device is not compatible with TFOD.");
         }
 
         /**
@@ -141,13 +140,16 @@ public class taro_tensorflow_experimentation extends LinearOpMode {
                       telemetry.addData("% Object Detected", updatedRecognitions.size());
                       // step through the list of recognitions and display boundary info.
                       int i = 0;
-                      forward(0.01, 1);
-                      //actions to complete after recognized
+
                       for (Recognition recognition : updatedRecognitions) {
-                        telemetry.addData(String.format("label (%d)", i), recognition.getLabel());
-                        telemetry.addData(String.format("  left,top (%d)", i), "%.03f , %.03f",
+                          if (recognition.getLabel().equals(OBJECT)){
+
+                          }
+
+                          telemetry.addData(String.format("label (%d)", i), recognition.getLabel());
+                          telemetry.addData(String.format("  left,top (%d)", i), "%.03f , %.03f",
                                           recognition.getLeft(), recognition.getTop());
-                        telemetry.addData(String.format("  right,bottom (%d)", i), "%.03f , %.03f",
+                          telemetry.addData(String.format("  right,bottom (%d)", i), "%.03f , %.03f",
                                 recognition.getRight(), recognition.getBottom());
                       }
                       telemetry.update();
@@ -165,9 +167,9 @@ public class taro_tensorflow_experimentation extends LinearOpMode {
      * Initialize the Vuforia localization engine.
      */
     private void initVuforia() {
-        /*
-         * Configure Vuforia by creating a Parameter object, and passing it to the Vuforia engine.
-         */
+
+         //Configure Vuforia by creating a Parameter object, and passing it to the Vuforia engine.
+
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
 
         parameters.vuforiaLicenseKey = VUFORIA_KEY;
@@ -186,7 +188,7 @@ public class taro_tensorflow_experimentation extends LinearOpMode {
         int tfodMonitorViewId = hardwareMap.appContext.getResources().getIdentifier(
             "tfodMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(tfodMonitorViewId);
-        tfodParameters.minimumConfidence = 0.8;
+        tfodParameters.minimumConfidence = 0.9;
         tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
         tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABEL_FIRST_ELEMENT, LABEL_SECOND_ELEMENT);
     }
