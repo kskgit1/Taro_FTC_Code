@@ -388,11 +388,96 @@ public class taro_tensorflow_experimentation extends LinearOpMode {
     public void hand(double position){
         hand_servo.setPosition(position);
     }
+    public void arm(double position) {
+        arm_servo.setPosition(position);
+    }
     public void hair_close(){
         hair1_servo.setPosition(0);
         hair2_servo.setPosition(0);
     }
     public void hair_open(){
         hair1_servo.setPosition(0.5);
-        hair2_servo.setPosition(0.5);    }
+        hair2_servo.setPosition(0.5);
+    }
+    public void fly_wheels_in(double power, int distance) {
+        fly_Wheel.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        fly_Wheel.setTargetPosition(distance);
+        fly_Wheel.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        fly_Wheel.setPower(power);
+
+        while (fly_Wheel.isBusy()) {
+            //until rotations complete
+        }
+
+        power = 0.0;
+        fly_Wheel.setPower(power);
+    }
+
+    //linear slide functions
+    public void slide_up(double power, int distance) {
+        back_Slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        left_Slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        back_Slide.setTargetPosition(distance);
+        left_Slide.setTargetPosition(distance);
+
+        back_Slide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        left_Slide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        back_Slide.setPower(power);
+        left_Slide.setPower(power);
+
+        while (back_Slide.isBusy() && left_Slide.isBusy()) {
+            //until point reached
+        }
+
+        power = 0.0;
+        back_Slide.setPower(power);
+        left_Slide.setPower(power);
+    }
+    public void slide_down(double power, int distance) {
+        back_Slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        left_Slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        back_Slide.setTargetPosition(distance);
+        left_Slide.setTargetPosition(distance);
+
+        back_Slide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        left_Slide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        back_Slide.setPower(-power);
+        left_Slide.setPower(-power);
+
+        while (back_Slide.isBusy() && left_Slide.isBusy()) {
+            //until point reached
+        }
+
+        power = 0.0;
+        back_Slide.setPower(power);
+        left_Slide.setPower(power);
+    }
+    public void slide_out(double power, int distance){
+        top_Slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        top_Slide.setTargetPosition(distance);
+        top_Slide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        top_Slide.setPower(power);
+
+        while (top_Slide.isBusy()){
+            //until point reached
+        }
+        power = 0.0;
+        top_Slide.setPower(power);
+    }
+    public void slide_in(double power, int distance){
+        top_Slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        top_Slide.setTargetPosition(distance);
+        top_Slide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        top_Slide.setPower(-power);
+
+        while (top_Slide.isBusy()){
+            //until point reached
+        }
+        power = 0.0;
+        top_Slide.setPower(power);
+    }
 }
