@@ -69,6 +69,7 @@ public class MainDriver extends LinearOpMode {
             double Turn = gamepad1.right_stick_x;
             double Strafe = gamepad1.left_stick_x;
             double Catch = gamepad1.right_trigger;  // using flywheel
+            double Release = gamepad1.left_trigger; // using flywheel
             double Lift = gamepad2.left_stick_y;    // using linear slides
             double Place = gamepad2.right_stick_x;  // using top slide
 
@@ -77,7 +78,8 @@ public class MainDriver extends LinearOpMode {
             double f_right;
             double b_left;
             double b_right;
-            double fly_wheel;
+            double fly_wheel_catch;
+            double fly_wheel_release;
             double back_slide;
             double left_slide;
             double top_slide;
@@ -86,7 +88,8 @@ public class MainDriver extends LinearOpMode {
             f_right = Speed - Turn - Strafe;
             b_right = Speed - Turn + Strafe;
             b_left = Speed + Turn - Strafe;
-            fly_wheel = Catch;
+            fly_wheel_catch = Catch;
+            fly_wheel_release = Release;
             back_slide = Lift;
             left_slide = Lift;
             top_slide = Place;
@@ -95,7 +98,8 @@ public class MainDriver extends LinearOpMode {
             frDrive.setPower(Range.clip(f_right, -1.0, 1.0));
             brDrive.setPower(Range.clip(b_right, -1.0, 1.0));
             blDrive.setPower(Range.clip(b_left, -1.0, 1.0));
-            fly_Wheel.setPower(Range.clip(fly_wheel, -1.0, 1.0));
+            fly_Wheel.setPower(Range.clip(fly_wheel_catch, -1.0, 1.0));
+            fly_Wheel.setPower(Range.clip(fly_wheel_release, 1.0, -1.0));
             back_Slide.setPower(Range.clip(back_slide, -1.0, 1.0));
             left_Slide.setPower(Range.clip(left_slide, -1.0, 1.0));
             top_Slide.setPower(Range.clip(top_slide, -1.0, 1.0));
