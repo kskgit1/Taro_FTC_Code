@@ -24,9 +24,9 @@ public class MainDriver extends LinearOpMode {
     double currentposition_hand = 0; //hand: servo on the top of the arm servo
     double currentposition_head = 0; //head: the final top block twisting servo
     double currentposition_hair = 0; //hair: clamps to secure the block
+    boolean slow_mode = false;
+    double speed_power;
 
-
-    
     @Override
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
@@ -91,15 +91,25 @@ public class MainDriver extends LinearOpMode {
             left_slide = Lift;
             top_slide = Place;
 
-            flDrive.setPower(Range.clip(f_left, -1.0, 1.0));
-            frDrive.setPower(Range.clip(f_right, -1.0, 1.0));
-            brDrive.setPower(Range.clip(b_right, -1.0, 1.0));
-            blDrive.setPower(Range.clip(b_left, -1.0, 1.0));
+            flDrive.setPower(Range.clip(f_left, -speed_power, speed_power));
+            frDrive.setPower(Range.clip(f_right, -speed_power, speed_power));
+            brDrive.setPower(Range.clip(b_right, -speed_power, speed_power));
+            blDrive.setPower(Range.clip(b_left, -speed_power, speed_power));
             fly_Wheel.setPower(Range.clip(fly_wheel, -1.0, 1.0));
             back_Slide.setPower(Range.clip(back_slide, -1.0, 1.0));
             left_Slide.setPower(Range.clip(left_slide, -1.0, 1.0));
             top_Slide.setPower(Range.clip(top_slide, -1.0, 1.0));
             
+            if (gamepad1.right_stick_button){
+                if (slow_mode){
+                    speed_power = 0.1;
+                }
+                if (slow_mode == false){
+                    speed_power = 1.0;
+                }
+
+            }
+
 
             if(gamepad1.a) // reduce servo position for arm
             {
@@ -113,13 +123,13 @@ public class MainDriver extends LinearOpMode {
                 arm_servo.setPosition(currentposition_arm);
             }
 
+            //if the Right Bumper on Gamepad 1 is pressed, then the servo position will increase
             if(gamepad1.left_bumper)  // reduce servo position for hand
             {
                 currentposition_hand = currentposition_hand - 0.1;
                 hand_servo.setPosition(currentposition_hand);
             }
-            
-            //if the Right Bumper on Gamepad 1 is pressed, then the servo position will increase  
+
             //servos in action: hand
             if(gamepad1.right_bumper) // increase servo position for hand
             {
