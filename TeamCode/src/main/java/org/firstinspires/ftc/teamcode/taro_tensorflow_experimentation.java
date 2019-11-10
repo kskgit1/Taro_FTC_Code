@@ -54,7 +54,9 @@ public class taro_tensorflow_experimentation extends LinearOpMode {
     private static final String LABEL_SECOND_ELEMENT = "Skystone";
 
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor fldrive, frdrive, bldrive, brdrive;
+    private DcMotor fldrive, frdrive, bldrive, brdrive, fly_Wheel, back_Slide, left_Slide, top_Slide; // initialize all motors
+    Servo arm_servo, hand_servo, head_servo, hair1_servo, hair2_servo;
+
     //Servo servo;
 
     private static final String VUFORIA_KEY =
@@ -78,15 +80,36 @@ public class taro_tensorflow_experimentation extends LinearOpMode {
         // first.
         initVuforia();
 
+        //
         fldrive  = hardwareMap.get(DcMotor.class, "fl_drive");
         frdrive  = hardwareMap.get(DcMotor.class, "fr_drive");
         brdrive = hardwareMap.get(DcMotor.class, "br_drive");
         bldrive = hardwareMap.get(DcMotor.class, "bl_drive");
 
+        //flywheels and slide initializations
+        fly_Wheel = hardwareMap.get(DcMotor.class, "fly_Wheel");
+        back_Slide = hardwareMap.get(DcMotor.class, "back_Slide");
+        left_Slide = hardwareMap.get(DcMotor.class, "left_Slide");
+        top_Slide = hardwareMap.get(DcMotor.class, "top_Slide");
+
+        //servo initialization
+        arm_servo = hardwareMap.get(Servo.class, "arm");
+        hand_servo = hardwareMap.get(Servo.class, "hand");
+        head_servo = hardwareMap.get(Servo.class, "head");
+        hair1_servo = hardwareMap.get(Servo.class, "hair1");
+        hair2_servo = hardwareMap.get(Servo.class, "hair2");
+
+        //drive train motor directions
         fldrive.setDirection(DcMotor.Direction.FORWARD);
         frdrive.setDirection(DcMotor.Direction.REVERSE);
         brdrive.setDirection(DcMotor.Direction.REVERSE);
         bldrive.setDirection(DcMotor.Direction.FORWARD);
+
+        //other DcMotor directions
+        fly_Wheel.setDirection(DcMotor.Direction.FORWARD);// fly wheel motor
+        back_Slide.setDirection(DcMotor.Direction.FORWARD);
+        left_Slide.setDirection(DcMotor.Direction.FORWARD);
+        top_Slide.setDirection(DcMotor.Direction.FORWARD);
 
         if (ClassFactory.getInstance().canCreateTFObjectDetector()) {
             initTfod();
@@ -357,4 +380,19 @@ public class taro_tensorflow_experimentation extends LinearOpMode {
         brdrive.setPower(power);
         bldrive.setPower(power);
     }
+
+    //servo functions
+    public void head(double position){
+        head_servo.setPosition(position);
+    }
+    public void hand(double position){
+        hand_servo.setPosition(position);
+    }
+    public void hair_close(){
+        hair1_servo.setPosition(0);
+        hair2_servo.setPosition(0);
+    }
+    public void hair_open(){
+        hair1_servo.setPosition(0.5);
+        hair2_servo.setPosition(0.5);    }
 }
