@@ -18,15 +18,15 @@ public class MainDriver extends LinearOpMode {
     private DcMotor flDrive, frDrive, blDrive, brDrive, fly_Wheel, back_Slide, left_Slide, top_Slide; // initialize all motors
     //these below servos are named to mimic a human body. the comment next to it explains the role/ position
     //intialize all servos
-    Servo arm_servo, hand_servo, head_servo, hair1_servo, hair2_servo;
+    Servo arm_servo, hand_servo, head_servo, hair_servo;
     //currentpositions for arm, hand, head, and hair servos
     double currentposition_arm = 0; //arm: small arm on the side
     double currentposition_hand = 0; //hand: servo on the top of the arm servo
     double currentposition_head = 0; //head: the final top block twisting servo
-    double currentposition_hair1 = 0; //hair1 and hair 2: clamps to secure the block 
-    double currentposition_hair2 = 0;
+    double currentposition_hair = 0; //hair: clamps to secure the block
 
 
+    
     @Override
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
@@ -36,8 +36,8 @@ public class MainDriver extends LinearOpMode {
         arm_servo = hardwareMap.get(Servo.class, "arm");
         hand_servo = hardwareMap.get(Servo.class, "hand");
         head_servo = hardwareMap.get(Servo.class, "head");
-        hair1_servo = hardwareMap.get(Servo.class, "hair1");
-        hair2_servo = hardwareMap.get(Servo.class, "hair2");
+        hair_servo = hardwareMap.get(Servo.class, "hair");
+
 
         flDrive = hardwareMap.get(DcMotor.class, "fl_drive"); //motor 0 
         frDrive = hardwareMap.get(DcMotor.class, "fr_drive"); //motor 1
@@ -69,17 +69,15 @@ public class MainDriver extends LinearOpMode {
             double Turn = gamepad1.right_stick_x;
             double Strafe = gamepad1.left_stick_x;
             double Catch = gamepad1.right_trigger;  // using flywheel
-            double Release = gamepad1.left_trigger; // using flywheel
             double Lift = gamepad2.left_stick_y;    // using linear slides
             double Place = gamepad2.right_stick_x;  // using top slide
-
+          
             //initialize the variables
             double f_left;
             double f_right;
             double b_left;
             double b_right;
-            double fly_wheel_catch;
-            double fly_wheel_release;
+            double fly_wheel; 
             double back_slide;
             double left_slide;
             double top_slide;
@@ -88,8 +86,7 @@ public class MainDriver extends LinearOpMode {
             f_right = Speed - Turn - Strafe;
             b_right = Speed - Turn + Strafe;
             b_left = Speed + Turn - Strafe;
-            fly_wheel_catch = Catch;
-            fly_wheel_release = Release;
+            fly_wheel = Catch;
             back_slide = Lift;
             left_slide = Lift;
             top_slide = Place;
@@ -98,34 +95,33 @@ public class MainDriver extends LinearOpMode {
             frDrive.setPower(Range.clip(f_right, -1.0, 1.0));
             brDrive.setPower(Range.clip(b_right, -1.0, 1.0));
             blDrive.setPower(Range.clip(b_left, -1.0, 1.0));
-            fly_Wheel.setPower(Range.clip(fly_wheel_catch, -1.0, 1.0));
-            fly_Wheel.setPower(Range.clip(fly_wheel_release, 1.0, -1.0));
+            fly_Wheel.setPower(Range.clip(fly_wheel, -1.0, 1.0));
             back_Slide.setPower(Range.clip(back_slide, -1.0, 1.0));
             left_Slide.setPower(Range.clip(left_slide, -1.0, 1.0));
             top_Slide.setPower(Range.clip(top_slide, -1.0, 1.0));
+            
 
-
-            if (gamepad1.a) // reduce servo position for arm
+            if(gamepad1.a) // reduce servo position for arm
             {
                 currentposition_arm = currentposition_arm - 0.1;
                 arm_servo.setPosition(currentposition_arm);
             }
 
-            if (gamepad1.x)  // increase servo position for arm
+            if(gamepad1.x)  // increase servo position for arm
             {
                 currentposition_arm = currentposition_arm + 0.1;
                 arm_servo.setPosition(currentposition_arm);
             }
 
-            if (gamepad1.left_bumper)  // reduce servo position for hand
+            if(gamepad1.left_bumper)  // reduce servo position for hand
             {
                 currentposition_hand = currentposition_hand - 0.1;
                 hand_servo.setPosition(currentposition_hand);
             }
-
+            
             //if the Right Bumper on Gamepad 1 is pressed, then the servo position will increase  
             //servos in action: hand
-            if (gamepad1.right_bumper) // increase servo position for hand
+            if(gamepad1.right_bumper) // increase servo position for hand
             {
                 currentposition_hand = currentposition_hand + 0.1;
                 hand_servo.setPosition(currentposition_hand);
@@ -133,48 +129,46 @@ public class MainDriver extends LinearOpMode {
 
             //if the Left Bumper on Gamepad 2 is pressed, then the servo will turn counterclockwise
             //servos in action: head
-            if (gamepad2.left_bumper) {
+            if(gamepad2.left_bumper)
+            {
                 currentposition_head = currentposition_head - 0.1;
                 head_servo.setPosition(currentposition_hand);
             }
-
+            
             //if the Right Bumper on Gamepad 2 is pressed, then the servo will turn clockwise
             //servos in action: head
-            if (gamepad2.right_bumper) {
+            if(gamepad2.right_bumper)  
+            {
                 currentposition_head = currentposition_head + 0.1;
                 head_servo.setPosition(currentposition_head);
-
+                
             }
-
+            
             //if A on Gamepad 2 is pressed, then both servos will be clamped at the same time 
             //servos in action: hair1 and hair2
-            if (gamepad2.a) {
-                if (currentposition_hair1 == 0) {
-                    currentposition_hair1 = 0.5;
-                    hair1_servo.setPosition(currentposition_hair1);
-                } else {
-                    currentposition_hair1 = 0;
-                    hair1_servo.setPosition(currentposition_hair1);
+            if(gamepad2.a)   
+            {
+                if(currentposition_hair == 0)
+                {
+                    currentposition_hair = 0.5;
+                    hair_servo.setPosition(currentposition_hair);
                 }
-
-                if (gamepad2.a) {
-                    if (currentposition_hair2 == 0) {
-                        currentposition_hair2 = 0.5;
-                        hair2_servo.setPosition(currentposition_hair2);
-                    } else {
-                        currentposition_hair2 = 0;
-                        hair2_servo.setPosition(currentposition_hair2);
-                    }
-
-                }
-
-                //display the wheel power and elapsed run time
-                telemetry.addData("Status", "Run Time: " + runtime.toString());
-                telemetry.addData("Motors", "left (%.2f), right (%.2f)", f_left, f_right, b_left, b_right);
-                telemetry.update();
+                else
+                {
+                    currentposition_hair = 0;
+                    hair_servo.setPosition(currentposition_hair);
             }
+                
 
-
+            }
+            
+            //display the wheel power and elapsed run time
+            telemetry.addData("Status", "Run Time: " + runtime.toString());
+            telemetry.addData("Motors", "left (%.2f), right (%.2f)", f_left, f_right, b_left, b_right);
+            telemetry.update();
         }
+
+
     }
 }
+
