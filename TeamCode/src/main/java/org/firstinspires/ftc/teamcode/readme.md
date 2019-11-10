@@ -2,7 +2,7 @@
 
 Welcome!
 
-This module contains all of Team Taro's code for the Robot Controller App
+This module contains all of Team Taro's code for the Robot Controller App.
 
 ## Creating your own OpModes
 
