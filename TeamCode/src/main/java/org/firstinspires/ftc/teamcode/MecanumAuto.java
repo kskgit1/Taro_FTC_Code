@@ -136,12 +136,13 @@ public class MecanumAuto extends LinearOpMode{
         runtime.reset();
 
         //call the functions: power, distance
-        forward(0.5, 2000);
-        backward(0.5, 2000);
-        left(0.5, 1000);
-        right(0.5, 1000);
-        strafeleft(0.5,1000);
-        straferight(0.5,1000);
+        //forward(0.5, 2000);
+        //backward(0.5, 2000);
+        //todo tell gaurav how far this should go in inches\
+        straferight(0.5, 1500);
+        //right(0.5, 1000);
+        //strafeleft(0.5,1000);
+        //straferight(0.5,1000);
 
 
     }
