@@ -30,6 +30,8 @@ public abstract class Robot {
 class DrivetrainTeleOp extends Robot {
 
     private DcMotor fl, fr, bl, br;
+    
+    private double robotAngle = 0;
 
     private double speedFactor = 1;
 
@@ -59,17 +61,62 @@ class DrivetrainTeleOp extends Robot {
     @Override
     public void move (Gamepad gamepad1, Gamepad gamepad2) {
 
-        fr.setPower(gamepad1.left_stick_y * invertPerspective * speedFactor);
-        fl.setPower(gamepad1.left_stick_y * invertPerspective * speedFactor);
-        br.setPower(gamepad1.left_stick_y * invertPerspective * speedFactor);
-        bl.setPower(gamepad1.left_stick_y * invertPerspective * speedFactor);
+//         fr.setPower(gamepad1.left_stick_y * invertPerspective * speedFactor);
+//         fl.setPower(gamepad1.left_stick_y * invertPerspective * speedFactor);
+//         br.setPower(gamepad1.left_stick_y * invertPerspective * speedFactor);
+//         bl.setPower(gamepad1.left_stick_y * invertPerspective * speedFactor);
 
-        fr.setPower(gamepad1.left_stick_x * invertPerspective * speedFactor);
-        fl.setPower(-gamepad1.left_stick_x * invertPerspective * speedFactor);
-        br.setPower(-gamepad1.left_stick_x * invertPerspective * speedFactor);
-        bl.setPower(gamepad1.left_stick_x * invertPerspective * speedFactor);
+//         fr.setPower(gamepad1.left_stick_x * invertPerspective * speedFactor);
+//         fl.setPower(-gamepad1.left_stick_x * invertPerspective * speedFactor);
+//         br.setPower(-gamepad1.left_stick_x * invertPerspective * speedFactor);
+//         bl.setPower(gamepad1.left_stick_x * invertPerspective * speedFactor);
+        
+        //disclaimer: the code below is officially goated ACCORDING TO MY FRC TEAM (LIKE WHATTT) and a huge flex on deja/astro/endgame.
+        //basically what the code does is the robot will move in the direction the joystick is pointing NO MATTER THE ANGLE OF THE ROBOT
+        //yee
+        
+        this.robotAngle = get angle from gyro (its called heading) from the gyro built in the REV hub called IMU; //yea so someone do this 
+        
+        double desiredAngle = getAngle(gamepad1.x, gamepad1.y);
+        
+        fr.setPower(getPowerRed(desiredAngle - robotAngle));
+        bl.setPower(getPowerRed(desiredAngle - robotAngle));
+        
+        fl.setPower(getPowerBlue(desiredAngle - robotAngle));
+        br.setPower(getPowerBlue(desiredAngle - robotAngle));
+            
 
     }
+    
+    public static double getAngle(double x, double y) {
+		double angle = 0;
+		//c = square root of x squared plus y squared
+		double hyp = Math.pow(((x*x) + (y*y)), 0.5);
+		
+		angle = Math.asin(y/hyp);
+		
+		angle = Math.toDegrees(angle);
+		
+		return angle;
+	}
+    
+    public static double getPowerRed(double angle) {
+		double power = 0;
+		angle = Math.toRadians(angle);
+		power = Math.sin(angle - (Math.PI * 0.25));
+		if(power > 1) return 0;
+		return power;
+		
+	}
+	
+	public static double getPowerBlue(double angle) {
+		double power = 0;
+		angle = Math.toRadians(angle);
+		power = Math.sin(angle + (Math.PI * 0.25));
+		if(power > 1) return 0;
+		return power;
+		
+	}
 }
 
 class Servos extends Robot {
