@@ -121,16 +121,7 @@ public class MainDriver extends LinearOpMode {
             xControl = !gamepad1.x;
 
 
-           /* if (gamepad1.x){
-                if (slow_mode){
-                    speed_power = 0.1;
-                }
-                if (slow_mode == false){
-                    speed_power = 1.0;
-                }
-
-            }
-
+           /*
 
             if(gamepad1.a) // reduce servo position for arm
             {
