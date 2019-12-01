@@ -26,7 +26,8 @@ public class MainDriver extends LinearOpMode {
     double currentposition_head = 0; //head: the final top block twisting servo
     double currentposition_hair = 0; //hair: clamps to secure the block
     boolean slow_mode = false;
-    double speed_power;
+    boolean xControl = false;
+    //double speed_power;
 
     @Override
     public void runOpMode() {
@@ -44,7 +45,7 @@ public class MainDriver extends LinearOpMode {
         frDrive = hardwareMap.get(DcMotor.class, "fr_drive"); //motor 1
         brDrive = hardwareMap.get(DcMotor.class, "br_drive"); //motor 2
         blDrive = hardwareMap.get(DcMotor.class, "bl_drive"); //motor 3
-        fly_Wheel = hardwareMap.get(DcMotor.class, "fly_Wheel");
+        //fly_Wheel = hardwareMap.get(DcMotor.class, "fly_Wheel");
         back_Slide = hardwareMap.get(DcMotor.class, "back_Slide");
         left_Slide = hardwareMap.get(DcMotor.class, "left_Slide");
         top_Slide = hardwareMap.get(DcMotor.class, "top_Slide");
@@ -54,7 +55,7 @@ public class MainDriver extends LinearOpMode {
         frDrive.setDirection(DcMotor.Direction.REVERSE); //motor 1
         brDrive.setDirection(DcMotor.Direction.REVERSE); //motor 2
         blDrive.setDirection(DcMotor.Direction.FORWARD); //motor 3
-        fly_Wheel.setDirection(DcMotor.Direction.FORWARD);// fly wheel motor
+        //fly_Wheel.setDirection(DcMotor.Direction.FORWARD);// fly wheel motor
         back_Slide.setDirection(DcMotor.Direction.FORWARD);
         left_Slide.setDirection(DcMotor.Direction.FORWARD);
         top_Slide.setDirection(DcMotor.Direction.FORWARD);
@@ -72,7 +73,8 @@ public class MainDriver extends LinearOpMode {
             double Catch = gamepad1.right_trigger;  // using flywheel
             double Lift = gamepad2.left_stick_y;    // using linear slides
             double Place = gamepad2.right_stick_x;  // using top slide
-          
+            double Release = gamepad1.left_trigger; // release block
+
             //initialize the variables
             double f_left;
             double f_right;
@@ -82,26 +84,44 @@ public class MainDriver extends LinearOpMode {
             double back_slide;
             double left_slide;
             double top_slide;
+            double fly_wheel_release;
 
             f_left = Speed + Turn + Strafe;
-            f_right = Speed - Turn - Strafe;
-            b_right = Speed - Turn + Strafe;
+            f_right = Speed - Turn + Strafe;
+            b_right = Speed - Turn - Strafe;
             b_left = Speed + Turn - Strafe;
             fly_wheel = Catch;
+            fly_wheel_release = Release;
             back_slide = Lift;
             left_slide = Lift;
             top_slide = Place;
 
-            flDrive.setPower(Range.clip(f_left, -speed_power, speed_power));
-            frDrive.setPower(Range.clip(f_right, -speed_power, speed_power));
-            brDrive.setPower(Range.clip(b_right, -speed_power, speed_power));
-            blDrive.setPower(Range.clip(b_left, -speed_power, speed_power));
-            fly_Wheel.setPower(Range.clip(fly_wheel, -1.0, 1.0));
+            if(slow_mode){
+                f_left/=10;
+                f_right/=10;
+                b_left/=10;
+                b_right/=10;
+
+            }
+
+            flDrive.setPower(Range.clip(f_left, -1.0, 1.0));
+            frDrive.setPower(Range.clip(f_right, -1.0, 1.0));
+            brDrive.setPower(Range.clip(b_right, -1.0, 1.0));
+            blDrive.setPower(Range.clip(b_left, -1.0, 1.0));
+            //fly_Wheel.setPower(Range.clip(fly_wheel, -1.0, 1.0));
+            //fly_Wheel.setPower(Range.clip(fly_wheel_release, 1.0, -1.0));
             back_Slide.setPower(Range.clip(back_slide, -1.0, 1.0));
             left_Slide.setPower(Range.clip(left_slide, -1.0, 1.0));
             top_Slide.setPower(Range.clip(top_slide, -1.0, 1.0));
-            
-            if (gamepad1.a){
+
+            if(gamepad1.x && xControl){
+                slow_mode = !slow_mode;
+            }
+
+            xControl = !gamepad1.x;
+
+
+           /* if (gamepad1.x){
                 if (slow_mode){
                     speed_power = 0.1;
                 }
@@ -112,7 +132,7 @@ public class MainDriver extends LinearOpMode {
             }
 
 
-            /*if(gamepad1.a) // reduce servo position for arm
+            if(gamepad1.a) // reduce servo position for arm
             {
                 currentposition_arm = currentposition_arm - 0.1;
                 arm_servo.setPosition(currentposition_arm);
@@ -178,6 +198,11 @@ public class MainDriver extends LinearOpMode {
             //display the wheel power and elapsed run time
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Motors", "left (%.2f), right (%.2f)", f_left, f_right, b_left, b_right);
+            telemetry.addData("flDrive",Double.toString(flDrive.getPower()));
+            telemetry.addData("flDrive",Double.toString(frDrive.getPower()));
+            telemetry.addData("flDrive",Double.toString(blDrive.getPower()));
+            telemetry.addData("flDrive",Double.toString(brDrive.getPower()));
+
             telemetry.update();
         }
 
