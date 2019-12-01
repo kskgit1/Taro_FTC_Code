@@ -143,7 +143,7 @@ public class taro_tensorflow_experimentation extends LinearOpMode {
 
                       for (Recognition recognition : updatedRecognitions) {
                           if (recognition.getLabel().equals(LABEL_FIRST_ELEMENT)){
-                              straferight(0.05; distance 1);
+                              straferight(0.05, 1);
                           }
                           if (recognition.getLabel().equals(LABEL_SECOND_ELEMENT)){
                               //when SkyStone detected
