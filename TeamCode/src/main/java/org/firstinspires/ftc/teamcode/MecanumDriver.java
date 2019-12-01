@@ -7,7 +7,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.robotcore.hardware.Servo;
 
-
 @TeleOp(name = "MecanumDriver", group = "Linear OpMode")
 public class MecanumDriver extends LinearOpMode {
 
