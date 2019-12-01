@@ -131,7 +131,7 @@ public class taro_tensorflow_experimentation extends LinearOpMode {
 
         if (opModeIsActive()) {
             while (opModeIsActive()) {
-                strafeleft(0.05, 1000);
+                straferight(0.05, 1000);
                 if (tfod != null) {
                     // getUpdatedRecognitions() will return null if no new information is available since
                     // the last time that call was made.
@@ -142,6 +142,9 @@ public class taro_tensorflow_experimentation extends LinearOpMode {
                       int i = 0;
 
                       for (Recognition recognition : updatedRecognitions) {
+                          if (recognition.getLabel().equals(LABEL_FIRST_ELEMENT)){
+                              straferight(0.05; distance 1);
+                          }
                           if (recognition.getLabel().equals(LABEL_SECOND_ELEMENT)){
                               //when SkyStone detected
                               forward(0.1, 2);
