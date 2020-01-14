@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -11,7 +12,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class MecanumDriver extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor flDrive, frDrive, blDrive, brDrive;
+    private DcMotor fldrive, frdrive, bldrive, brdrive; //flywheel;
     //Servo arm_bottom_servo;
 
     @Override
@@ -19,39 +20,55 @@ public class MecanumDriver extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-        flDrive = hardwareMap.get(DcMotor.class, "fl_drive");
-        frDrive = hardwareMap.get(DcMotor.class, "fr_drive");
-        brDrive = hardwareMap.get(DcMotor.class, "br_drive");
-        blDrive = hardwareMap.get(DcMotor.class, "bl_drive");
+        fldrive = hardwareMap.get(DcMotor.class, "fl_drive");
+        frdrive = hardwareMap.get(DcMotor.class, "fr_drive");
+        brdrive = hardwareMap.get(DcMotor.class, "br_drive");
+        bldrive = hardwareMap.get(DcMotor.class, "bl_drive");
+        //flywheel = hardwareMap.get(DcMotor.class, "fly_wheel");
 
-        flDrive.setDirection(DcMotor.Direction.FORWARD);
-        frDrive.setDirection(DcMotor.Direction.REVERSE);
-        brDrive.setDirection(DcMotor.Direction.REVERSE);
-        blDrive.setDirection(DcMotor.Direction.FORWARD);
+        fldrive.setDirection(DcMotor.Direction.FORWARD);
+        frdrive.setDirection(DcMotor.Direction.REVERSE);
+        brdrive.setDirection(DcMotor.Direction.REVERSE);
+        bldrive.setDirection(DcMotor.Direction.FORWARD);
+        //flywheel.setDirection(DcMotor.Direction.REVERSE);
 
         waitForStart();
         runtime.reset();
 
         while (opModeIsActive()) {
 
-            double Speed = -gamepad1.left_stick_y;
-            double Turn = gamepad1.right_stick_x;
+
+            double drivepower;
+            //double flypower = 1;
+
+            if(gamepad1.a)
+                drivepower = 0.3;
+            else
+                drivepower = 1;
+
+            double DriveSpeed = -gamepad1.left_stick_y;
+            double Rotate = gamepad1.right_stick_x;
             double Strafe = gamepad1.left_stick_x;
+            //double FlySpeed = gamepad1.right_trigger;
 
             double f_left;
             double f_right;
             double b_left;
             double b_right;
+            //double fly_wheel;
 
-            f_left = Speed + Turn + Strafe;
-            f_right = Speed - Turn - Strafe;
-            b_right = Speed - Turn + Strafe;
-            b_left = Speed + Turn - Strafe;
+            f_left = DriveSpeed + Rotate + Strafe;
+            f_right = DriveSpeed - Rotate - Strafe;
+            b_right = DriveSpeed - Rotate + Strafe;
+            b_left = DriveSpeed + Rotate - Strafe;
+            //fly_wheel = FlySpeed;
 
-            flDrive.setPower(Range.clip(f_left, -1.0, 1.0));
-            frDrive.setPower(Range.clip(f_right, -1.0, 1.0));
-            brDrive.setPower(Range.clip(b_right, -1.0, 1.0));
-            blDrive.setPower(Range.clip(b_left, -1.0, 1.0));
+
+            fldrive.setPower(Range.clip(f_left, -drivepower, drivepower));
+            frdrive.setPower(Range.clip(f_right, -drivepower, drivepower));
+            brdrive.setPower(Range.clip(b_right, -drivepower, drivepower));
+            bldrive.setPower(Range.clip(b_left, -drivepower, drivepower));
+            //flywheel.setPower(Range.clip(fly_wheel, -flypower, flypower));
 
 
             telemetry.addData("Status", "Run Time: " + runtime.toString());
