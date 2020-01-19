@@ -12,9 +12,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class MecanumDriver extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor fldrive, frdrive, bldrive, brdrive; //flywheel;
-    //Servo arm_bottom_servo;
+    private DcMotor fldrive, frdrive, bldrive, brdrive; //flywheel, leftslide, rightslide, arm;
 
+    double left_trigger_value = 0;
     @Override
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
@@ -25,12 +25,18 @@ public class MecanumDriver extends LinearOpMode {
         brdrive = hardwareMap.get(DcMotor.class, "br_drive");
         bldrive = hardwareMap.get(DcMotor.class, "bl_drive");
         //flywheel = hardwareMap.get(DcMotor.class, "fly_wheel");
+        //leftslide = hardwareMap.get(DcMotor.class, "left_slide");
+        //rightslide = hardwareMap.get(DcMotor.class, "right_slide");
+        //arm = hardwareMap.get(DcMotor.class, "arm");
 
         fldrive.setDirection(DcMotor.Direction.FORWARD);
         frdrive.setDirection(DcMotor.Direction.REVERSE);
         brdrive.setDirection(DcMotor.Direction.REVERSE);
         bldrive.setDirection(DcMotor.Direction.FORWARD);
         //flywheel.setDirection(DcMotor.Direction.REVERSE);
+        //leftslide.setDirection(DcMotor.Direction.FORWARD);
+        //rightslide.setDirection(DcMotor.Direction.REVERSE);
+        //arm.setDirection(DcMotor.Direction.FORWARD);
 
         waitForStart();
         runtime.reset();
@@ -40,28 +46,37 @@ public class MecanumDriver extends LinearOpMode {
 
             double drivepower;
             //double flypower = 1;
+            //double liftpower = 1;
+            //double armpower = 1;
 
-            if(gamepad1.a)
-                drivepower = 0.3;
-            else
-                drivepower = 1;
+
+           left_trigger_value = gamepad1.left_trigger-0.5;
+           drivepower = 0.5-left_trigger_value;
 
             double DriveSpeed = -gamepad1.left_stick_y;
             double Rotate = gamepad1.right_stick_x;
             double Strafe = gamepad1.left_stick_x;
             //double FlySpeed = gamepad1.right_trigger;
+            //double Lift = gamepad2.left_stick_y;
+            //double MoveArm = gamepad2.right.stick_y;
 
             double f_left;
             double f_right;
             double b_left;
             double b_right;
             //double fly_wheel;
+            //double left_slide;
+            //double right_slide;
+            //double arm;
 
             f_left = DriveSpeed + Rotate + Strafe;
             f_right = DriveSpeed - Rotate - Strafe;
             b_right = DriveSpeed - Rotate + Strafe;
             b_left = DriveSpeed + Rotate - Strafe;
             //fly_wheel = FlySpeed;
+            //left_slide = Lift;
+            //right_slide = Lift;
+            //arm = MoveArm;
 
 
             fldrive.setPower(Range.clip(f_left, -drivepower, drivepower));
@@ -69,6 +84,10 @@ public class MecanumDriver extends LinearOpMode {
             brdrive.setPower(Range.clip(b_right, -drivepower, drivepower));
             bldrive.setPower(Range.clip(b_left, -drivepower, drivepower));
             //flywheel.setPower(Range.clip(fly_wheel, -flypower, flypower));
+            //leftslide.setPower(Range.clip(left_slide, -liftpower, liftpower));
+            //rightslide.setPower(Range.clip(right_slide, -liftpower, liftpower));
+            //arm.setPower(Range.clip(arm, -armpower, armpower));
+
 
 
             telemetry.addData("Status", "Run Time: " + runtime.toString());
