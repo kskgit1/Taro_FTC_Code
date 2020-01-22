@@ -13,6 +13,7 @@ public class MecanumDriver extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor fldrive, frdrive, bldrive, brdrive; //flywheel, leftslide, rightslide, arm;
+    //private Servo leftextender, rightextender, leftrotater, rightrotater, centerrotater, grabber;
 
     double left_trigger_value = 0;
     @Override
@@ -28,6 +29,12 @@ public class MecanumDriver extends LinearOpMode {
         //leftslide = hardwareMap.get(DcMotor.class, "left_slide");
         //rightslide = hardwareMap.get(DcMotor.class, "right_slide");
         //arm = hardwareMap.get(DcMotor.class, "arm");
+        //leftextender = hardwareMap.get(Servo.class, "left_extender");
+        //rightextender = hardwareMap.get(Servo.class, "right_extender");
+        //leftrotater = hardwareMap.get(Servo.class, "left_rotater");
+        //rightrotater = hardwareMap.get(Servo.class, "right_rotater");
+        //centerrotater = hardwareMap.get(Servo.class, "center_rotater");
+        //grabber = hardwareMap.get(Servo.class, "grabber");
 
         fldrive.setDirection(DcMotor.Direction.FORWARD);
         frdrive.setDirection(DcMotor.Direction.REVERSE);
@@ -37,6 +44,8 @@ public class MecanumDriver extends LinearOpMode {
         //leftslide.setDirection(DcMotor.Direction.FORWARD);
         //rightslide.setDirection(DcMotor.Direction.REVERSE);
         //arm.setDirection(DcMotor.Direction.FORWARD);
+
+
 
         waitForStart();
         runtime.reset();
@@ -88,6 +97,9 @@ public class MecanumDriver extends LinearOpMode {
             //rightslide.setPower(Range.clip(right_slide, -liftpower, liftpower));
             //arm.setPower(Range.clip(arm, -armpower, armpower));
 
+
+            double positiveextenderincrement = gamepad2.right_trigger * 0.1;
+            double negativeextenderincrement = (gamepad2.left_trigger * 0.1) * -1;
 
 
             telemetry.addData("Status", "Run Time: " + runtime.toString());
