@@ -13,9 +13,23 @@ public class MecanumDriver extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor fldrive, frdrive, bldrive, brdrive; //flywheel, leftslide, rightslide, arm;
-    //private Servo leftextender, rightextender, leftrotater, rightrotater, centerrotater, grabber;
+    //private Servo leftextender, rightextender, leftrotater, rightrotater, centerrotater, grabber1, grabber2;
 
     double left_trigger_value = 0;
+    /*
+    double leftextenderposition = 0;
+    double rightextenderposition = 0;
+    double leftrotaterposition = 0;
+    double leftrotaterincrement = 0.01;
+    double rightrotaterposition = 0;
+    double rightrotaterincrement = 0.01;
+    double centerrotaterposition = 0;
+    double centerrotaterincrement = 0.01;
+    double grabber1position = 0;
+    double grabber2position = 0;
+    double grabberincrement = 0;
+    */
+
     @Override
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
@@ -29,12 +43,16 @@ public class MecanumDriver extends LinearOpMode {
         //leftslide = hardwareMap.get(DcMotor.class, "left_slide");
         //rightslide = hardwareMap.get(DcMotor.class, "right_slide");
         //arm = hardwareMap.get(DcMotor.class, "arm");
-        //leftextender = hardwareMap.get(Servo.class, "left_extender");
-        //rightextender = hardwareMap.get(Servo.class, "right_extender");
-        //leftrotater = hardwareMap.get(Servo.class, "left_rotater");
-        //rightrotater = hardwareMap.get(Servo.class, "right_rotater");
-        //centerrotater = hardwareMap.get(Servo.class, "center_rotater");
-        //grabber = hardwareMap.get(Servo.class, "grabber");
+        /*
+        leftextender = hardwareMap.get(Servo.class, "left_extender");
+        rightextender = hardwareMap.get(Servo.class, "right_extender");
+        leftrotater = hardwareMap.get(Servo.class, "left_rotater");
+        rightrotater = hardwareMap.get(Servo.class, "right_rotater");
+        centerrotater = hardwareMap.get(Servo.class, "center_rotater");
+        grabber1 = hardwareMap.get(Servo.class, "grabber1");
+        grabber2 = hardwareMap.get(Servo.class, "grabber2");
+        
+         */
 
         fldrive.setDirection(DcMotor.Direction.FORWARD);
         frdrive.setDirection(DcMotor.Direction.REVERSE);
@@ -96,12 +114,54 @@ public class MecanumDriver extends LinearOpMode {
             //leftslide.setPower(Range.clip(left_slide, -liftpower, liftpower));
             //rightslide.setPower(Range.clip(right_slide, -liftpower, liftpower));
             //arm.setPower(Range.clip(arm, -armpower, armpower));
+            
+            
+            /*
+            leftextenderposition = leftextender.getPosition() - (gamepad2.right_trigger * 0.1);
+            leftextender.setPosition(leftextenderposition);
 
+            rightextenderposition = rightextender.getPosition() + (gamepad2.right_trigger * 0.1);
+            rightextender.setPosition(rightextenderposition);
 
-            double positiveextenderincrement = gamepad2.right_trigger * 0.1;
-            double negativeextenderincrement = (gamepad2.left_trigger * 0.1) * -1;
+            if(gamepad2.x)
+            {
+                leftrotaterposition = leftrotater.getPosition() - leftrotaterincrement;
+                rightrotaterposition = rightrotater.getPosition() + rightrotaterincrement;
+                leftrotater.setPosition(leftrotaterposition);
+                rightrotater.setPosition(rightrotaterposition);
 
+            }
 
+            if(gamepad2.y)
+            {
+                leftrotaterposition = leftrotater.getPosition() + leftrotaterincrement;
+                rightrotaterposition = rightrotater.getPosition() - rightrotaterincrement;
+                leftrotater.setPosition(leftrotaterposition);
+                rightrotater.setPosition(rightrotaterposition);
+
+            }
+
+            if(gamepad2.left_bumper)
+            {
+                centerrotaterposition = centerrotater.getPosition() - centerrotaterincrement;
+                centerrotater.setPosition(centerrotaterposition);
+            }
+
+            if(gamepad2.right_bumper)
+            {
+                centerrotaterposition = centerrotater.getPosition() + centerrotaterincrement;
+                centerrotater.setPosition(centerrotaterposition);
+            }
+
+            if(gamepad2.a)
+            {
+                grabber1position = grabber1.getPosition() - grabberincrement;
+                grabber2position = grabber2.getPosition() + grabberincrement;
+                grabber1.setPosition(grabber1position);
+                grabber2.setPosition(grabber2position);
+            }
+            */
+            
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Motors", "left (%.2f), right (%.2f)", f_left, f_right, b_left, b_right);
             telemetry.update();
