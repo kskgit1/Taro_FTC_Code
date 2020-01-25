@@ -27,7 +27,7 @@ public class MecanumDriver extends LinearOpMode {
     double centerrotaterincrement = 0.01;
     double grabber1position = 0;
     double grabber2position = 0;
-    double grabberincrement = 0;
+    double grabberincrement = 0.01;
     */
 
     @Override
