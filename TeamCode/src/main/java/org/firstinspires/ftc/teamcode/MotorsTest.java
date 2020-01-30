@@ -12,7 +12,7 @@ public class MotorsTest extends LinearOpMode
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor flywheel, leftslide, rightslide, arm;
     double flypower, armpower;
-    double liftpower = 0.7;
+    double liftpower = gamepad1.left_stick_y;
     int liftincrement = 500;
 
 
@@ -48,7 +48,7 @@ public class MotorsTest extends LinearOpMode
             flywheel.setPower(Range.clip(flypower, -flypower, flypower));
 
 
-            if(gamepad1.dpad_up)
+            if(gamepad1.left_stick_y>0)
             {
                 leftslide.setTargetPosition(leftslide.getCurrentPosition() + liftincrement);
                 rightslide.setTargetPosition(leftslide.getCurrentPosition() + liftincrement);
@@ -66,12 +66,12 @@ public class MotorsTest extends LinearOpMode
                 rightslide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             }
 
-            if(gamepad1.dpad_down && ((leftslide.getCurrentPosition() - liftincrement) < 0))
+            if(gamepad1.left_stick_y<0 && ((leftslide.getCurrentPosition() - liftincrement) < 0))
             {
                 leftslide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                 rightslide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             }
-            else if(gamepad1.dpad_down)
+            else if(gamepad1.left_stick_y<0)
             {
                 leftslide.setTargetPosition(leftslide.getCurrentPosition() - liftincrement);
                 rightslide.setTargetPosition(leftslide.getCurrentPosition() - liftincrement);
@@ -90,7 +90,7 @@ public class MotorsTest extends LinearOpMode
             }
 
 
-            armpower = gamepad1.left_stick_y;
+            armpower = gamepad1.right_stick_y;
 
             arm.setPower(Range.clip(armpower, -armpower, armpower));
         }
@@ -99,3 +99,4 @@ public class MotorsTest extends LinearOpMode
     }
 
 }
+
