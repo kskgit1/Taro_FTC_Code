@@ -12,8 +12,7 @@ public class LinearSlideTest extends LinearOpMode
 {
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor leftslide, rightslide;
-    double liftpower = gamepad1.left_stick_y;
-    int liftincrement = 500;
+
 
     @Override
     public void runOpMode()
@@ -22,8 +21,8 @@ public class LinearSlideTest extends LinearOpMode
         leftslide = hardwareMap.get(DcMotor.class, "leftslide");
         rightslide = hardwareMap.get(DcMotor.class, "rightslide");
 
-        leftslide.setDirection(DcMotor.Direction.FORWARD);
-        rightslide.setDirection(DcMotor.Direction.FORWARD);
+        leftslide.setDirection(DcMotor.Direction.REVERSE);
+        rightslide.setDirection(DcMotor.Direction.REVERSE);
 
         waitForStart();
         runtime.reset();
@@ -33,6 +32,10 @@ public class LinearSlideTest extends LinearOpMode
 
         while (opModeIsActive())
         {
+
+            double liftpower = gamepad1.left_stick_y;
+            int liftincrement = 500;
+
             if(gamepad1.left_stick_y>0)
             {
                 leftslide.setTargetPosition(leftslide.getCurrentPosition() + liftincrement);
